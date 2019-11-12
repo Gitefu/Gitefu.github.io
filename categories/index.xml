@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on たなかの付箋</title>
-    <link>https://Gitefu.github.io/blogSite/categories/</link>
+    <link>https://Gitefu.github.io/categories/</link>
     <description>Recent content in Categories on たなかの付箋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>jp</language>
     <lastBuildDate>Mon, 11 Nov 2019 13:09:19 +0900</lastBuildDate>
     
-	<atom:link href="https://Gitefu.github.io/blogSite/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://Gitefu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ものつくり</title>
-      <link>https://Gitefu.github.io/blogSite/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/</link>
+      <link>https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/</link>
       <pubDate>Mon, 11 Nov 2019 13:09:19 +0900</pubDate>
       
-      <guid>https://Gitefu.github.io/blogSite/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/</guid>
+      <guid>https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/</guid>
       <description></description>
     </item>
     
