@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="jp" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <meta charset="utf-8">
+  <title>GSEを作る話(3) · たなかの付箋</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="今回はこの内容で書きます． ・必要な機能 ・温度の恐怖 ・なぜFETを用いるのか ・電磁弁選定の注意 んーイグナイターはまた今度かな． 言い訳がましいで" />
+
+  <meta name="keywords" content="ロケット, Rocket, 電子工作, Arduino, tofunology, ものつくり, 宇宙, マイコン, コンピュータ, プログラミング" />
+
+<link rel="canonical" href="https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B13/" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://Gitefu.github.io/blogSite/css/den.css">
+
+
+
+
+<meta property="og:title" content="GSEを作る話(3)" />
+<meta property="og:description" content="今回はこの内容で書きます． ・必要な機能 ・温度の恐怖 ・なぜFETを用いるのか ・電磁弁選定の注意 んーイグナイターはまた今度かな． 言い訳がましいで" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B13/" />
+<meta property="article:published_time" content="2019-11-11T13:09:19+09:00" />
+<meta property="article:modified_time" content="2019-11-11T13:09:19+09:00" />
+<meta itemprop="name" content="GSEを作る話(3)">
+<meta itemprop="description" content="今回はこの内容で書きます． ・必要な機能 ・温度の恐怖 ・なぜFETを用いるのか ・電磁弁選定の注意 んーイグナイターはまた今度かな． 言い訳がましいで">
+
+
+<meta itemprop="datePublished" content="2019-11-11T13:09:19&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-11T13:09:19&#43;09:00" />
+<meta itemprop="wordCount" content="913">
+
+
+
+<meta itemprop="keywords" content="rocket,GSE," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GSEを作る話(3)"/>
+<meta name="twitter:description" content="今回はこの内容で書きます． ・必要な機能 ・温度の恐怖 ・なぜFETを用いるのか ・電磁弁選定の注意 んーイグナイターはまた今度かな． 言い訳がましいで"/>
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://Gitefu.github.io/blogSite/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="https://Gitefu.github.io/blogSite/">
+      
+        
+        <img class="mr20 header-logo-image" src="https://Gitefu.github.io/blogSite/images/globe.svg" alt="logo">
+        
+        
+          たなかの付箋
+         
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/blogSite/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A">ものつくり</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/blogSite/category/event">イベント</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/blogSite/category/etc">その他</a>
+              
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">GSEを作る話(3)</h1>
+        <p class="header-date">By
+          tanaka /
+        
+        2019-11-11
+          / In categories
+          <a href="https://Gitefu.github.io/blogSite/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/">ものつくり</a>
+        </p>
+        
+        <div class="header-underline"></div>
+        
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <a href="https://Gitefu.github.io/blogSite/tag/gse/">GSE</a>,
+                <a href="https://Gitefu.github.io/blogSite/tag/rocket/">rocket</a>
+          </p>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <main>
+<div class="container content">
+  <article>
+  
+
+<p>今回はこの内容で書きます．<br>
+　・必要な機能<br>
+　・温度の恐怖<br>
+　・なぜFETを用いるのか<br>
+　・電磁弁選定の注意<br>
+んーイグナイターはまた今度かな．<br>
+　言い訳がましいですが，詳しい人からすれば少々間違えてることもありましょうが，初心者向けの資料にするためにググれば即理解できるような言葉で書けたらと思っています．わかりにくいことがあればTwitterのDMでもいいので教えていただけると助かります．orz</p>
+
+<h2 id="必要な機能">必要な機能</h2>
+
+<p>　ここでは「個人的に必要と思う機能」の話をします．(個人的に！ですよ！)<br>
+  　必要な動作はこんな感じ．<br>
+  　　・酸化剤を酸化剤タンクへ送る(俗にいうFill動作ってやつですね)<br>
+  　　・酸素を着火寸前にグレイン内部に送る<br>
+  　　・電気的にショートさせて着火する(イグニッション！ってやつです)<br>
+  　これらを安全に動作させることが1番大切です．</p>
+
+<h2 id="温度の恐怖">温度の恐怖</h2>
+
+<p>　N2Oの配管図，見ましたか？(多分GSEを作る話(2)に載ってます)　N2Oの弁には電磁弁ではなくN2を用いた空圧弁が使われています．なんでわざわざこうしているかというと，「電磁弁が温度に左右されやすいから」というところにあります．<br>
+  　液体のN2Oってとても温度が低いんですよね．そのせいで電磁弁が壊れてしまうことが多々あるそうです．これを防ぐためにN2Oを流す弁を全て空圧弁にして，N2で操作する形に変更しました．このN2の操作するために電磁弁を使うので操作的には電磁弁でN2Oを操作する感じと変わらないですね．<br></p>
+
+<h2 id="なぜfetを用いるのか">なぜFETを用いるのか</h2>
+
+<p>　本来ならただのスイッチでもいいような気がしますが，あえて今回はFETのような電気的なスイッチングの可能な部品を使うことにしました．<br>
+  　これは「マイコンを用いて見て欲しいから」というのが最大の理由です．シーケンスを自動化したり無線にしたり，正しくマイコンを用いると部品増加による部品故障件数の増加のリスクが増すものの，ヒューマンエラーが減ると思っています(やりようによっては両方のリスクが増しますが)．　ですが，まずは欲張らず有線で行います．</p>
+
+<h2 id="電磁弁選定の注意">電磁弁選定の注意</h2>
+
+<p>　電磁弁はノーマルクローズ(NC)のものとノーマルオープン(NO)のものに分かれます．万が一電源が供給されなくなっても安全なように使い分けましょう．</p>
+
+<p><br><br><br></p>
+
+  </article>
+
+  
+  
+    
+    <div class="author-card">
+    <div class="underline"></div>
+    <div class="author-box">
+      <div class="author-image"><img src="/blogSite/images/blank-profile.png" /></div>
+      <div class="author-content">
+      <p class="author-title">Author</p>
+      <p class="author-name">tanaka</p>
+      <p class="author-desc"><p>20歳・大学生<br>好きなコンテンツ・・・アイドルコネクト<br>好きなキャラ　　・・・森久保乃々<br><p>所属<br>・<a href="https://tofunology.github.io/site/" target="_blank">tofunology</a><br>・Lightus燃焼班<br>・マイクロコンピューター部</p><p><a href = "https://twitter.com/nktanakat" target="_blank">Twitterはこちら</a></p></p>
+</p>
+      </div>
+    </div>
+  </div>
+    
+  
+  
+
+
+</div>
+
+  </main><div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="https://Gitefu.github.io/blogSite/tags/">Tags</a></li>
+              
+              
+                <li><a href="https://Gitefu.github.io/blogSite/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="https://Gitefu.github.io/blogSite/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://twitter.com/nktanakat" rel="noopener" target="_blank">Twitter</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div> 
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy; 
+            Tanaka
+            2019
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rocket on たなかの付箋</title>
+    <link>https://Gitefu.github.io/blogSite/tag/rocket/</link>
+    <description>Recent content in rocket on たなかの付箋</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Mon, 11 Nov 2019 13:09:19 +0900</lastBuildDate>
+    
+	<atom:link href="https://Gitefu.github.io/blogSite/tag/rocket/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GSEを作る話(1)</title>
+      <link>https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B11/</link>
+      <pubDate>Mon, 11 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B11/</guid>
+      <description>ここではGSEが何かの話をした後に，作ることになった経緯を話します． GSEとは GroundSupportEquipmentなんていうもので，</description>
+    </item>
+    
+    <item>
+      <title>GSEを作る話(3)</title>
+      <link>https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B13/</link>
+      <pubDate>Mon, 11 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B13/</guid>
+      <description>今回はこの内容で書きます． ・必要な機能 ・温度の恐怖 ・なぜFETを用いるのか ・電磁弁選定の注意 んーイグナイターはまた今度かな． 言い訳がましいで</description>
+    </item>
+    
+  </channel>
+</rss>
