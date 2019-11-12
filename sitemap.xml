@@ -23,13 +23,6 @@
   </url>
   
   <url>
-    <loc>https://Gitefu.github.io/blogSite/2019/11/11/ai%E3%82%A2%E3%83%BC%E3%83%A0%E8%A3%BD%E4%BD%9C%E3%81%AE%E8%A9%B1/</loc>
-    <lastmod>2019-11-11T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://Gitefu.github.io/blogSite/tag/arduino/</loc>
     <lastmod>2019-11-11T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -44,35 +37,7 @@
   </url>
   
   <url>
-    <loc>https://Gitefu.github.io/blogSite/tag/gse/</loc>
-    <lastmod>2019-11-11T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B11/</loc>
-    <lastmod>2019-11-11T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/blogSite/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B13/</loc>
-    <lastmod>2019-11-11T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://Gitefu.github.io/blogSite/posts/</loc>
-    <lastmod>2019-11-11T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/blogSite/tag/rocket/</loc>
     <lastmod>2019-11-11T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
