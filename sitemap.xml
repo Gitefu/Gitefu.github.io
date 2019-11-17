@@ -37,6 +37,27 @@
   </url>
   
   <url>
+    <loc>https://Gitefu.github.io/tag/githubpages/</loc>
+    <lastmod>2019-11-13T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/2019/11/13/githubpages-hugo%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B/</loc>
+    <lastmod>2019-11-13T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/hugo/</loc>
+    <lastmod>2019-11-13T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://Gitefu.github.io/posts/</loc>
     <lastmod>2019-11-13T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -45,6 +66,13 @@
   
   <url>
     <loc>https://Gitefu.github.io/tags/</loc>
+    <lastmod>2019-11-13T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/web%E9%96%A2%E9%80%A3/</loc>
     <lastmod>2019-11-13T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

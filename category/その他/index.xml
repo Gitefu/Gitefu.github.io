@@ -12,12 +12,21 @@
     
     
     <item>
+      <title>githubPages&#43;hugoでブログを作る</title>
+      <link>https://Gitefu.github.io/2019/11/13/githubpages-hugo%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B/</link>
+      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/13/githubpages-hugo%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B/</guid>
+      <description>はじめに 私はmacで作りました。 WSLを使えばWindows人もhugoのインストール以外は同じ手順で良いはずです。(他はよく分からぬ) あと</description>
+    </item>
+    
+    <item>
       <title>秋葉のご飯メモ</title>
       <link>https://Gitefu.github.io/2019/11/13/%E7%A7%8B%E8%91%89%E3%81%AE%E3%81%94%E9%A3%AF%E3%83%A1%E3%83%A2/</link>
       <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/2019/11/13/%E7%A7%8B%E8%91%89%E3%81%AE%E3%81%94%E9%A3%AF%E3%83%A1%E3%83%A2/</guid>
-      <description>過去に食べた秋葉のお店のメモ 写真があるもの載っけていきます． 気になったらggってみてください，良質な情報が落ちてるはずです． 吟くら たまた友人</description>
+      <description>過去に食べた秋葉のお店のメモ 写真があるもの載っけていきます。 気になったらggってみてください、良質な情報が落ちてるはずです。 吟くら たまた友人</description>
     </item>
     
   </channel>
