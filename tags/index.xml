@@ -6,7 +6,7 @@
     <description>Recent content in Tags on たなかの森</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>jp</language>
-    <lastBuildDate>Wed, 13 Nov 2019 13:09:19 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 15 Nov 2019 13:09:19 +0900</lastBuildDate>
     
 	<atom:link href="https://Gitefu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>AI</title>
       <link>https://Gitefu.github.io/tag/ai/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      <pubDate>Fri, 15 Nov 2019 13:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/ai/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>AIアーム</title>
       <link>https://Gitefu.github.io/tag/ai%E3%82%A2%E3%83%BC%E3%83%A0/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      <pubDate>Fri, 15 Nov 2019 13:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/ai%E3%82%A2%E3%83%BC%E3%83%A0/</guid>
       <description></description>
@@ -32,16 +32,34 @@
     <item>
       <title>Arduino</title>
       <link>https://Gitefu.github.io/tag/arduino/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      <pubDate>Fri, 15 Nov 2019 13:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/arduino/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>学祭</title>
+      <link>https://Gitefu.github.io/tag/%E5%AD%A6%E7%A5%AD/</link>
+      <pubDate>Fri, 15 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/tag/%E5%AD%A6%E7%A5%AD/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>電子工作</title>
+      <link>https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</link>
+      <pubDate>Fri, 15 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>githubPages</title>
       <link>https://Gitefu.github.io/tag/githubpages/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      <pubDate>Wed, 13 Nov 2019 16:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/githubpages/</guid>
       <description></description>
@@ -50,7 +68,7 @@
     <item>
       <title>hugo</title>
       <link>https://Gitefu.github.io/tag/hugo/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      <pubDate>Wed, 13 Nov 2019 16:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/hugo/</guid>
       <description></description>
@@ -59,18 +77,9 @@
     <item>
       <title>Web関連</title>
       <link>https://Gitefu.github.io/tag/web%E9%96%A2%E9%80%A3/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      <pubDate>Wed, 13 Nov 2019 16:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/web%E9%96%A2%E9%80%A3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>学祭</title>
-      <link>https://Gitefu.github.io/tag/%E5%AD%A6%E7%A5%AD/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
-      
-      <guid>https://Gitefu.github.io/tag/%E5%AD%A6%E7%A5%AD/</guid>
       <description></description>
     </item>
     
@@ -80,15 +89,6 @@
       <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
       
       <guid>https://Gitefu.github.io/tag/%E7%A7%8B%E8%91%89%E5%8E%9F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>電子工作</title>
-      <link>https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</link>
-      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
-      
-      <guid>https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</guid>
       <description></description>
     </item>
     
