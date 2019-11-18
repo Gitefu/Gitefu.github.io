@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI on たなかの森</title>
+    <link>https://Gitefu.github.io/tag/ai/</link>
+    <description>Recent content in AI on たなかの森</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <copyright>nkTanakaT</copyright>
+    <lastBuildDate>Mon, 18 Nov 2019 13:09:19 +0900</lastBuildDate>
+    
+	<atom:link href="https://Gitefu.github.io/tag/ai/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AIアーム作りました(3)</title>
+      <link>https://Gitefu.github.io/2019/11/18/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F3/</link>
+      <pubDate>Mon, 18 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/18/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F3/</guid>
+      <description>今回はソフトのお話！ でもAI部分は書いてないよ！ Ardinoを使って制御！ 今回はArduinoMEGAを用いて制御を行いました。 Arduin</description>
+    </item>
+    
+    <item>
+      <title>AIアーム作りました(2)</title>
+      <link>https://Gitefu.github.io/2019/11/15/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F2/</link>
+      <pubDate>Fri, 15 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/15/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F2/</guid>
+      <description>アームの用意 時間もなかったのでAmazonで6,000〜7,000円のアームのキットをポチりました。製品自体には特に不満はありませんが、強い</description>
+    </item>
+    
+    <item>
+      <title>学祭2019</title>
+      <link>https://Gitefu.github.io/2019/11/13/%E5%AD%A6%E7%A5%AD2019/</link>
+      <pubDate>Wed, 13 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/13/%E5%AD%A6%E7%A5%AD2019/</guid>
+      <description>学祭参加しました 学祭、お疲れ様でした〜。今回MCCの農部学祭担当でしたが、運営の方々にとても世話になりました。私は農部への移動手段を持ってい</description>
+    </item>
+    
+    <item>
+      <title>AIアーム作りました(1)</title>
+      <link>https://Gitefu.github.io/2019/11/11/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F1/</link>
+      <pubDate>Mon, 11 Nov 2019 13:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/11/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F1/</guid>
+      <description>AIアームを作りました AIアーム、自分は作ることないだろうと思ってはいたんですけど、作ることになりました。感想を端的に言えば「作ってよかった</description>
+    </item>
+    
+  </channel>
+</rss>
