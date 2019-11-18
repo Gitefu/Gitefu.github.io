@@ -2,6 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://Gitefu.github.io/categories/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/fritzing/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/2019/11/18/fritzing%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/2019/11/18/makerfaire-tokyo2019/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/mft/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/posts/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tags/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/tofunology/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://Gitefu.github.io/tag/ai/</loc>
     <lastmod>2019-11-18T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -30,34 +121,6 @@
   </url>
   
   <url>
-    <loc>https://Gitefu.github.io/categories/</loc>
-    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/posts/</loc>
-    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/tags/</loc>
-    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/</loc>
-    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/</loc>
     <lastmod>2019-11-18T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -66,13 +129,6 @@
   
   <url>
     <loc>https://Gitefu.github.io/tag/%E5%AD%A6%E7%A5%AD/</loc>
-    <lastmod>2019-11-18T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</loc>
     <lastmod>2019-11-18T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -107,22 +163,8 @@
   </url>
   
   <url>
-    <loc>https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96/</loc>
-    <lastmod>2019-11-16T13:09:20+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://Gitefu.github.io/2019/11/15/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F2/</loc>
     <lastmod>2019-11-15T13:09:19+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88/</loc>
-    <lastmod>2019-11-13T13:09:19+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

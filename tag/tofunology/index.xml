@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tofunology on たなかの森</title>
+    <link>https://Gitefu.github.io/tag/tofunology/</link>
+    <description>Recent content in tofunology on たなかの森</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <copyright>nkTanakaT</copyright>
+    <lastBuildDate>Mon, 18 Nov 2019 16:09:19 +0900</lastBuildDate>
+    
+	<atom:link href="https://Gitefu.github.io/tag/tofunology/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MakerFaire Tokyo2019</title>
+      <link>https://Gitefu.github.io/2019/11/18/makerfaire-tokyo2019/</link>
+      <pubDate>Mon, 18 Nov 2019 16:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/18/makerfaire-tokyo2019/</guid>
+      <description>今年の8月に開催されたMakerFaireTokyo2019に、tofunologyとして出展しました。 MakerFaireTokyo201</description>
+    </item>
+    
+  </channel>
+</rss>

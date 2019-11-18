@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>jp</language>
     <copyright>nkTanakaT</copyright>
-    <lastBuildDate>Sat, 16 Nov 2019 16:09:19 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 18 Nov 2019 16:09:19 +0900</lastBuildDate>
     
 	<atom:link href="https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fritzingのインストール</title>
+      <link>https://Gitefu.github.io/2019/11/18/fritzing%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</link>
+      <pubDate>Mon, 18 Nov 2019 16:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/18/fritzing%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</guid>
+      <description>有料？なのかな？でもpriceではなくdonateとか書いてある以上、基本は無料のはず！コンソール叩いてもインストールできるのでやってみまし</description>
+    </item>
     
     <item>
       <title>githubPages&#43;hugoでブログを作る</title>
