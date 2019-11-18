@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-11-16T16:09:19&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-16T13:09:19&#43;09:00" />
-<meta itemprop="wordCount" content="3523">
+<meta itemprop="wordCount" content="3542">
 
 
 
@@ -182,7 +182,7 @@
   <strong>圧倒的に見やすいので絶対ミスらねえ(フラグ)！</strong><br>
   静的サイトジェネレーターは先ほどの画像のようなmd(マークダウン)形式のファイルをうまいことして、複雑なhtml形式に変換してくれます。<br>
   　では実際に静的サイトジェネレーターである<strong>「hugo」</strong> をインストールしましょう。<br></p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$brew</span> install hugo</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$brew</span> install hugo <span class="c1">#mac向けだぞ！winはwgetとか？</span></code></pre></div>
 <p>もしエラー起きたら多分Homebrew関連？ですかね。エラーがなければインストールが出来ました。<br>
   　次に<strong>サイトの準備をします</strong>。<br>
   hugoはテンプレートや様々なファイルを基にmdファイルをhtml形式に変換してくれます。その「<strong>様々なファイル</strong>」を次のコマンドで用意しましょう。<br></p>
@@ -240,8 +240,8 @@
 
 <h2 id="⑥-hugoで作ったサイトをgitを用いて公開する">⑥ hugoで作ったサイトをgitを用いて公開する</h2>
 
-<p>　まずは②で作成したディレクトリに移動しましょう。
-  　次には記事の追加をしてみましょう。</p>
+<p>　まずは②で作成したディレクトリに移動しましょう。<br>
+  　次に記事の追加をしてみましょう。</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$hugo</span> new posts/記事名.md <span class="c1">#たまにpost/記事名.mdの場合もあるので要確認</span></code></pre></div>
 <p>これでmdファイルが作成されました。ちなみに<strong>勝手にmdファイルを作ったり移動したりすると、ジェネレーターはうまく変換してくれません！絶対&rdquo;hugo new&rdquo;を使いましょう！</strong><br>
   　作成したmdファイルを開いてexampleファイルの中の記事を基に好きに変更して保存しましょう。<br>
