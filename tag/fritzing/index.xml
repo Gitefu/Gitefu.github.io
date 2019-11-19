@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fritzing on たなかの森</title>
+    <link>https://Gitefu.github.io/tag/fritzing/</link>
+    <description>Recent content in fritzing on たなかの森</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <copyright>nkTanakaT</copyright>
+    <lastBuildDate>Mon, 18 Nov 2019 16:09:19 +0900</lastBuildDate>
+    
+	<atom:link href="https://Gitefu.github.io/tag/fritzing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fritzingのインストール</title>
+      <link>https://Gitefu.github.io/2019/11/18/fritzing%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</link>
+      <pubDate>Mon, 18 Nov 2019 16:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/2019/11/18/fritzing%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</guid>
+      <description>有料？なのかな？でもpriceではなくdonateとか書いてある以上、基本は無料のはず！コンソール叩いてもインストールできるのでやってみまし</description>
+    </item>
+    
+  </channel>
+</rss>
