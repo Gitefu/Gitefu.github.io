@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="jp" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <meta charset="utf-8">
+  <title>AIアーム作りました(2) · たなかの森</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="アームの用意 時間もなかったのでAmazonで6,000〜7,000円のアームのキットをポチりました。製品自体には特に不満はありませんが、強い" />
+
+  <meta name="keywords" content="ロケット, Rocket, 電子工作, Arduino, tofunology, ものつくり, 宇宙, マイコン, コンピュータ, プログラミング" />
+
+<link rel="canonical" href="https://Gitefu.github.io/2019/11/15/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F2/" />
+
+<head>
+  <link rel="icon" type="image/png" href="https://Gitefu.github.io//images/favicon_32x32.jpg" />
+  <link rel="apple-touch-icon" href="https://Gitefu.github.io//images/favicon_152x152.jpg">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://Gitefu.github.io/css/den.css">
+
+
+
+
+<meta property="og:title" content="AIアーム作りました(2)" />
+<meta property="og:description" content="アームの用意 時間もなかったのでAmazonで6,000〜7,000円のアームのキットをポチりました。製品自体には特に不満はありませんが、強い" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Gitefu.github.io/2019/11/15/ai%E3%82%A2%E3%83%BC%E3%83%A0%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F2/" />
+<meta property="article:published_time" content="2019-11-15T13:09:19+09:00" />
+<meta property="article:modified_time" content="2019-11-15T13:09:19+09:00" />
+<meta itemprop="name" content="AIアーム作りました(2)">
+<meta itemprop="description" content="アームの用意 時間もなかったのでAmazonで6,000〜7,000円のアームのキットをポチりました。製品自体には特に不満はありませんが、強い">
+
+
+<meta itemprop="datePublished" content="2019-11-15T13:09:19&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-15T13:09:19&#43;09:00" />
+<meta itemprop="wordCount" content="1033">
+
+
+
+<meta itemprop="keywords" content="Arduino,電子工作,AI,AIアーム,学祭," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AIアーム作りました(2)"/>
+<meta name="twitter:description" content="アームの用意 時間もなかったのでAmazonで6,000〜7,000円のアームのキットをポチりました。製品自体には特に不満はありませんが、強い"/>
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://Gitefu.github.io/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="https://Gitefu.github.io/">
+      
+        
+        <img class="mr20 header-logo-image" src="https://Gitefu.github.io/images/globe.svg" alt="logo">
+        
+        
+          たなかの森
+        
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A">ものつくり</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88">イベント</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+              
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">AIアーム作りました(2)</h1>
+        <p class="header-date">By
+          tanaka /
+        
+        2019-11-15
+          / In categories
+          <a href="https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/">ものつくり</a>
+        </p>
+        
+        <div class="header-underline"></div>
+        
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <a href="https://Gitefu.github.io/tag/ai/">AI</a>,
+                <a href="https://Gitefu.github.io/tag/ai%E3%82%A2%E3%83%BC%E3%83%A0/">AIアーム</a>,
+                <a href="https://Gitefu.github.io/tag/arduino/">Arduino</a>,
+                <a href="https://Gitefu.github.io/tag/%E5%AD%A6%E7%A5%AD/">学祭</a>,
+                <a href="https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/">電子工作</a>
+          </p>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <main>
+<div class="container content">
+  <article>
+  
+
+<h2 id="アームの用意">アームの用意</h2>
+
+<p>　時間もなかったのでAmazonで6,000〜7,000円の<a href="https://www.amazon.co.jp/dp/B07M7TK6KR/ref=cm_sw_em_r_mt_dp_U_tdcZDbK25AQD7">アームのキット</a>をポチりました。製品自体には特に不満はありませんが、強いて言うなら「ミニ四駆の取説じゃなくてアームの取説を頼む！」ってぐらいでしょうか。開封後にミニ四駆の取説を1番に見てしまった時はとても不安になりました。。。<br><br></p>
+
+<h2 id="サーボの弱点">サーボの弱点</h2>
+
+<p>　<strong>軸がすごいゆとり設計されている！</strong> 今回における弱点はここだけです。ホーンに付ける部品の重心が片方にすごい寄ると、軸がそちらに傾きます。そのせいで距離が結構変わったりしてしまいました。</p>
+
+<h2 id="電磁石周りの色々">電磁石周りの色々</h2>
+
+<p>　アームの手の部分、掴む機構ではなく電磁石を取り付けることにしました。正直電磁石の選定方法とかわかりません。電磁石はまず5Vで50Nのやつを買ってみましたが、力が弱くて消しゴム取れなかったので12V70Nのものに決定しました。<br>
+　ただ電磁石、<strong>めっちゃ発熱します</strong>。故障しそうだったのでヒートシンクとファンをつけるべく改造しました。秋月さんの30mm*30mmの小型ファンと30mm*30mmのでっかいヒートシンクを使ってうまいこと真ん中と端っこに穴を開けてネジで止めました。
+<img src="/images/aiArm/eleMagnet.jpg" alt="電磁石周辺の写真" title="電磁石with冷却装置"></img>
+　いやー、かっこいい！んでファンを回しながら電磁石をONにして長時間放置してみると。。<strong>冷える！冷えすぎる！</strong>。冷えすぎても当然よくないのでArduino側で時間を使って制御しようかなと思います。<br><br></p>
+
+<h2 id="カメラの固定台">カメラの固定台</h2>
+
+<p>　カメラをアームの邪魔にならない場所から俯瞰させるようにして配置させる必要がありました。安くて簡単に、んでもって早く作れるようにダイソーで木材を買ってきました。
+<img src="/images/aiArm/kiriDaiso.jpg" alt="ダイソーの木の写真" title="木材"></img>
+　持った感じ桐材っぽかったので桐材として考えて、申し訳程度の重心確認を行いました。Fusion360は元々マテリアルとして桐材がないようなので自分で密度をggって調べて登録します。そしてこんな感じ。
+<img src="/images/aiArm/fusionFirst.jpg" alt="桐材のみの設計" title="桐材のみの設計"></img>
+重心が上でかつ左に寄っている。。。<br>
+　そこで重心を下げるために、柱の下の部分に重りを載せようと思い、家の中を探しました。するとこんなものが
+<img src="/images/aiArm/almi.jpg" alt="アルミ" title="アルミ"></img>
+いやー、落ちてるもんなんですね(自分が高校の機械分野の先生からいただいたアルミ棒の端切です)。これを取り付けて重心の計算をさせると。。。！
+<img src="/images/aiArm/fusionLast.jpg" alt="アルミを入れた設計" title="アルミを入れた設計"></img>
+　重心が根元に近づいた！こんなガバガバ設計でもなんとかなりますねえ。<br><br></p>
+
+<h2 id="土台">土台</h2>
+
+<p>　土台は部室に落ちていたコルクボードを使いますが、当然ネジみたいなのとめるとめり込むので、後ろにでもプラ板的なやつを貼って対策します。
+<img src="/images/aiArm/plaBoard.jpg" alt="プラ板を挟んだ画像" title="プラ板挟んだで"></img><br><br></p>
+
+<h1 id="以上-ハードはこんな感じです">・・・以上！ハードはこんな感じです</h1>
+
+<p>次回はソフトとか回路の話します。</p>
+
+  </article>
+
+  
+  
+    
+    <div class="author-card">
+    <div class="underline"></div>
+    <div class="author-box">
+      <div class="author-image"><img src="/images/blank-profile.png" /></div>
+      <div class="author-content">
+      <p class="author-title">Author</p>
+      <p class="author-name">tanaka</p>
+      <p class="author-desc"><p>20歳・大学生<br>好きなコンテンツ・・・アイドルコネクト<br>好きなキャラ　　・・・森久保乃々<br><p>所属<br>・<a href="https://tofunology.github.io/site/" target="_blank">tofunology</a><br>・Lightus燃焼班<br>・マイクロコンピューター部</p><p><a href = "https://twitter.com/nktanakat" target="_blank">Twitterはこちら</a></p></p>
+</p>
+      </div>
+    </div>
+  </div>
+    
+  
+  
+
+
+</div>
+
+  </main><div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="https://Gitefu.github.io/tags/">Tags</a></li>
+              
+              
+                <li><a href="https://Gitefu.github.io/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="https://Gitefu.github.io/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://twitter.com/nktanakat" rel="noopener" target="_blank">Twitter</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div> 
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy; 
+            nkTanakaT
+            2019
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
