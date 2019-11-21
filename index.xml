@@ -1,0 +1,25 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
+  <channel>
+    <title>たなかの森</title>
+    <link>https://Gitefu.github.io/</link>
+    <description>Recent content on たなかの森</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Mon, 18 Nov 2019 16:09:19 +0900</lastBuildDate>
+    
+        <atom:link href="https://Gitefu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Posts</title>
+      <link>https://Gitefu.github.io/posts/</link>
+      <pubDate>Mon, 18 Nov 2019 16:09:19 +0900</pubDate>
+      
+      <guid>https://Gitefu.github.io/posts/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
