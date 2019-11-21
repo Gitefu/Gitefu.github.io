@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="jp" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <meta charset="utf-8">
+  <title>GSEを作る話(1) · たなかの森</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ここではGSEが何かの話をした後に，作ることになった経緯を話します． GSEとは GroundSupportEquipmentなんていうもので，" />
+
+  <meta name="keywords" content="ロケット, Rocket, 電子工作, Arduino, tofunology, ものつくり, 宇宙, マイコン, コンピュータ, プログラミング" />
+
+<link rel="canonical" href="https://Gitefu.github.io/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B11/" />
+
+<head>
+  <link rel="icon" type="image/png" href="https://Gitefu.github.io/images/favicon_32x32.jpg" />
+  <link rel="apple-touch-icon" href="https://Gitefu.github.io/images/favicon_152x152.jpg">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://Gitefu.github.io/css/den.css">
+
+
+
+
+<meta property="og:title" content="GSEを作る話(1)" />
+<meta property="og:description" content="ここではGSEが何かの話をした後に，作ることになった経緯を話します． GSEとは GroundSupportEquipmentなんていうもので，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Gitefu.github.io/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B11/" />
+<meta property="article:published_time" content="2019-11-11T13:09:19+09:00" />
+<meta property="article:modified_time" content="2019-11-11T13:09:19+09:00" />
+<meta itemprop="name" content="GSEを作る話(1)">
+<meta itemprop="description" content="ここではGSEが何かの話をした後に，作ることになった経緯を話します． GSEとは GroundSupportEquipmentなんていうもので，">
+
+
+<meta itemprop="datePublished" content="2019-11-11T13:09:19&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-11T13:09:19&#43;09:00" />
+<meta itemprop="wordCount" content="1362">
+
+
+
+<meta itemprop="keywords" content="rocket,GSE," />
+
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+    <meta property="og:image" content="https://Gitefu.github.io/images/twitterImage.png"/>
+    <meta name="twitter:image:src" content="https://Gitefu.github.io/images/twitterImage.png"/>
+  
+  
+  <meta property="og:url" content="https://Gitefu.github.io/2019/11/11/gse%E3%82%92%E4%BD%9C%E3%82%8B%E8%A9%B11/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="GSEを作る話(1) - たなかの森"/>
+  <meta property="og:description" content="ここではGSEが何かの話をした後に，作ることになった経緯を話します． GSEとは GroundSupportEquipmentなんていうもので，"/>
+  
+  <meta name="twitter:title" content="GSEを作る話(1) - たなかの森"/>
+  <meta name="twitter:description" content="ここではGSEが何かの話をした後に，作ることになった経緯を話します． GSEとは GroundSupportEquipmentなんていうもので，"/>
+  
+  <meta name="twitter:domain" content="gitefu.github.io"/>
+  <meta name="twitter:creator" content="@nkTanakaT"/>
+
+
+
+  
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://Gitefu.github.io/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="https://Gitefu.github.io/">
+      
+        
+        <img class="mr20 header-logo-image" src="https://Gitefu.github.io/images/globe.svg" alt="logo">
+        
+        
+          たなかの森
+        
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A">ものつくり</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88">イベント</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+              
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">GSEを作る話(1)</h1>
+        <p class="header-date">By
+          tanaka /
+        
+        2019-11-11
+          / In categories
+          <a href="https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/">ものつくり</a>
+        </p>
+        
+        <div class="header-underline"></div>
+        
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <a href="https://Gitefu.github.io/tag/gse/">GSE</a>,
+                <a href="https://Gitefu.github.io/tag/rocket/">rocket</a>
+          </p>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <main>
+<div class="container content">
+  <article>
+  
+
+<p>ここではGSEが何かの話をした後に，作ることになった経緯を話します．</p>
+
+<h2 id="gseとは">GSEとは</h2>
+
+<p>　GroundSupportEquipmentなんていうもので，ハイブリッドロケットの打ち上げの際に必須の装置です．この装置は「酸化剤の充填」と「着火」を役割としており，大変危険でもありながら重要な装置です．</p>
+
+<h2 id="経緯-環境">経緯(環境)</h2>
+
+<p>　私の所属する団体は現在GSEを持っていません．計画自体はあったものの，機械系サークルと認められてないために大学側からの援助が少なかったことや，部室が4畳程度しかないために人員を増やそうにも増やせないことなど，様々な金銭的かつ時間的な理由で実現が難しい現状がありました(他の大学さんにも同じような境遇のところも多いでしょう)．<br>
+  　しかし！しかしですよ！来年度から私たちの部活が機械系サークルと認められ，資金的援助(10万円程度)だけでなくより広い活動場所，さらには学校の工場を申請すれば使わせていただけることになりました！(めでたい！使いたい！)これで場所が広くなったから同時に5人以上活動できますし，部員も増やせます．さらには外部の工場を借りなくてもいいのでまた少し費用が安くなります．うーん，嬉しいに決まってる．<br>
+  　これは大きなチャンスだ！ということでGSE製作へまた1歩つながりました．</p>
+
+<h2 id="経緯-経験">経緯(経験)</h2>
+
+<p>　次は「経験」を軸に経緯の話をします．<br>
+  　8月能代でGSEの運用を経験させていただけたことは本当によかった．8月能代に向けての燃焼実験と打ち上げ当日，千葉工大のSPARKさん(すみません，名前出して欲しくなければ教えてください)のGSEをお借りしてGSEの運用をさせていただきました．本当に助かりました．．．私の団体は実のところ過去2年で燃焼実験一回もやってないんじゃないかな．．．？(過去の推力履歴を用いてた気がする)(違うかも？)その影響もあって準備が不十分なまま燃焼実験へ向かってしまいました．<br>
+  　にもかかわらず，SPARKさんはたくさんのことを教えてくださって，準備までしてくださって，本当に頭が上がらない．．．SPARKさんのように，自分たちの団体もGSEを持っていない団体に自団体のモノを貸したり教えてあげたりしてあげるような，UNISON全体の技術向上の加速に貢献できる優しい団体にしたいですね．ほんと憧れます．<br>
+  　少々話がずれましたが，運用経験をつめたことで過去の先輩の配管のやり直した方が良い点を見つけたり，運用手順書を改善したいり，たくさんの収穫がありました．この経験をした私たちの代が製作するチャンスだと今回の製作へ踏み出す大きなきっかけになりました．</p>
+
+<h2 id="経緯-運営">経緯(運営)</h2>
+
+<p>　最後に運営側からのいろんな声を軸にして経緯の話をします．私が入学するころなので2年前？1年前？かと思いますが，GSEを所持しないGSEのレンタルは危険ではないか？という声が上がったようで(噂ですよ！)，ハイブリ飛ばせないかもみたいな話が部内でありました．<br>
+  　この話がいつ本当になるのかわからない以上，早急に作らないとですよね，，．<br><br><br></p>
+
+<p>・・・こんな感じの経緯でGSEの自作を進めることになりました．<br>
+んで，できたらここにGSEの設計の経緯とか色々載せることで，他大学のロケットサークルさんの手助けに少しでもなればとおもっています．<br>
+拙い文章・技術ですが，よろしくお願いします．<br><br></p>
+
+  </article>
+
+  
+  
+    
+    <div class="author-card">
+    <div class="underline"></div>
+    <div class="author-box">
+      <div class="author-image"><img src="/images/blank-profile.png" /></div>
+      <div class="author-content">
+      <p class="author-title">Author</p>
+      <p class="author-name">tanaka</p>
+      <p class="author-desc"><p>20歳・大学生<br>好きなコンテンツ・・・アイドルコネクト<br>好きなキャラ　　・・・森久保乃々<br><p>所属<br>・<a href="https://tofunology.github.io/site/" target="_blank">tofunology</a><br>・Lightus燃焼班<br>・マイクロコンピューター部</p><p><a href = "https://twitter.com/nktanakat" target="_blank">Twitterはこちら</a></p></p>
+</p>
+      </div>
+    </div>
+  </div>
+    
+  
+  
+
+
+</div>
+
+  </main><div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="https://Gitefu.github.io/tags/">Tags</a></li>
+              
+              
+                <li><a href="https://Gitefu.github.io/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="https://Gitefu.github.io/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://twitter.com/nktanakat" rel="noopener" target="_blank">Twitter</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy;
+            Tanaka
+            2019
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
