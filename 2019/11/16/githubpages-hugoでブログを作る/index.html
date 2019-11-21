@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="jp" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <meta charset="utf-8">
+  <title>githubPages&#43;hugoでブログを作る · たなかの森</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="はじめに 私はmacで作りました！ WSLを使えばWindows人もhugoのインストール以外は同じ手順で良いはずです。(他はよく分からぬ) あと" />
+
+  <meta name="keywords" content="ロケット, Rocket, 電子工作, Arduino, tofunology, ものつくり, 宇宙, マイコン, コンピュータ, プログラミング" />
+
+<link rel="canonical" href="https://Gitefu.github.io/2019/11/16/githubpages-hugo%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B/" />
+
+<head>
+  <link rel="icon" type="image/png" href="https://Gitefu.github.io//images/favicon_32x32.jpg" />
+  <link rel="apple-touch-icon" href="https://Gitefu.github.io//images/favicon_152x152.jpg">
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+    <meta property="og:image" content="https://Gitefu.github.io/Page(/posts/その他/makeSite.md)"/>
+  
+  
+  <meta property="og:url" content="https://Gitefu.github.io/2019/11/16/githubpages-hugo%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="githubPages&#43;hugoでブログを作る - たなかの森"/>
+  <meta property="og:description" content="はじめに 私はmacで作りました！ WSLを使えばWindows人もhugoのインストール以外は同じ手順で良いはずです。(他はよく分からぬ) あと"/>
+  <meta property="og:image" content="https://Gitefu.github.io/images/twitterImage.png"/>
+  
+  <meta name="twitter:title" content="githubPages&#43;hugoでブログを作る - たなかの森"/>
+  <meta name="twitter:description" content="はじめに 私はmacで作りました！ WSLを使えばWindows人もhugoのインストール以外は同じ手順で良いはずです。(他はよく分からぬ) あと"/>
+  
+  <meta name="twitter:domain" content="gitefu.github.io"/>
+  <meta name="twitter:creator" content="@nkTanakaT"/>
+
+
+© 2019 GitHub, Inc.
+
+  
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://Gitefu.github.io/css/den.css">
+
+
+
+
+<meta property="og:title" content="githubPages&#43;hugoでブログを作る" />
+<meta property="og:description" content="はじめに 私はmacで作りました！ WSLを使えばWindows人もhugoのインストール以外は同じ手順で良いはずです。(他はよく分からぬ) あと" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Gitefu.github.io/2019/11/16/githubpages-hugo%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B/" />
+<meta property="article:published_time" content="2019-11-16T16:09:19+09:00" />
+<meta property="article:modified_time" content="2019-11-16T13:09:19+09:00" />
+<meta itemprop="name" content="githubPages&#43;hugoでブログを作る">
+<meta itemprop="description" content="はじめに 私はmacで作りました！ WSLを使えばWindows人もhugoのインストール以外は同じ手順で良いはずです。(他はよく分からぬ) あと">
+
+
+<meta itemprop="datePublished" content="2019-11-16T16:09:19&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-16T13:09:19&#43;09:00" />
+<meta itemprop="wordCount" content="3541">
+
+
+
+<meta itemprop="keywords" content="hugo,githubPages,Web関連," />
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://Gitefu.github.io/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="https://Gitefu.github.io/">
+      
+        
+        <img class="mr20 header-logo-image" src="https://Gitefu.github.io/images/globe.svg" alt="logo">
+        
+        
+          たなかの森
+        
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A">ものつくり</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88">イベント</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+              
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">githubPages&#43;hugoでブログを作る</h1>
+        <p class="header-date">By
+          tanaka /
+        
+        2019-11-16
+          / In categories
+          <a href="https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96/">その他</a>
+        </p>
+        
+        <div class="header-underline"></div>
+        
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <a href="https://Gitefu.github.io/tag/githubpages/">githubPages</a>,
+                <a href="https://Gitefu.github.io/tag/hugo/">hugo</a>,
+                <a href="https://Gitefu.github.io/tag/web%E9%96%A2%E9%80%A3/">Web関連</a>
+          </p>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <main>
+<div class="container content">
+  <article>
+  
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>　私は<strong>mac</strong>で作りました！<br>
+  WSLを使えばWindows人も<strong>hugoのインストール以外は</strong>同じ手順で良いはずです。(他はよく分からぬ)<br>
+  　<strong>あと最近(?)公式がjekyllを推しています。</strong>使いやすそうですね。hugoに拘らない人はそっちを調べる方が吉かもしれません。<br>
+  <br></p>
+
+<h2 id="このサイトの構築">このサイトの構築</h2>
+
+<p>　<strong>このサイトはgithubPagesをhugoと組み合わせて作りました</strong>。hugoの使い方に戸惑って2日消費しましたが、合計3日程度で作れました。
+  <br>
+  　忘れないうちにと思って慌てて書いたので鵜呑みにはしない方が良いでしょう。他の記事も参考にして、参考の1つにぜひ。<br>
+  <br></p>
+
+<h2 id="導入は簡単">導入は簡単</h2>
+
+<p>　hugoを使うメリットとしては、<br>
+  　　・導入が<strong>楽</strong><br>
+  　　・テンプレートが用意されているが、<br>
+  　　　　cssを使って簡単に<strong>カスタマイズできる</strong><br>
+  　　・マークダウン方式で記事追加が<strong>簡単</strong><br>
+  <br></p>
+
+<h2 id="どういう手順か">どういう手順か</h2>
+
+<p>　ここでは導入の話をします。テンプレの弄り方とかはまた今度。<br>
+  　　① ターミナルを知る<br>
+  　　② hugoを導入する<br>
+  　　③ hugoのテーマを選ぶ<br>
+  　　④ gitをちょっと触る<br>
+  　　⑤ githubPagesを用意する<br>
+  　　⑥ hugoで作ったサイトをgitを用いて公開する<br>
+  <br></p>
+
+<h2 id="①-ターミナルを知る">① ターミナルを知る</h2>
+
+<p>　なるべくはじめての人向けに作ろうと思いますが、最低限 <strong>「ディレクトリ」「cdコマンド」「lsコマンド」「mkdirコマンド」</strong> 等を知っている前提で進めます。分からない人はググってから来てください。<br>
+  　まずはサイトを構築するためのディレクトリを用意して、そこまでターミナルで移動(<strong>cd</strong>)しておいて下さい。<br>
+  <br></p>
+
+<h2 id="②-hugoの導入">② hugoの導入</h2>
+
+<p>　hugoがそもそも何かというと<strong>静的サイトジェネレーター</strong>ってやつです。みなさん適当なwebサイトのソースコードって見たことありますか？こんな感じです。
+  <img src="/images/site/htmlScreenshot.jpg" alt="サイトのソースコードの写真" title="サイトのソースコード"></img>
+  　んー、これは<strong>書きにくい</strong>、、ミスりそうじゃありません？<br>
+  　そこで使うのが<strong>静的サイトジェネレーター</strong>ってやつです。下の画像は同じ記事のmd(マークダウン)形式のファイルです。
+  <img src="/images/site/siteGenerator.jpg" alt="静的サイトジェネレーターのイメージ" title="静的サイトジェネレーター"></img>
+  <strong>圧倒的に見やすいので絶対ミスらねえ(フラグ)！</strong><br>
+  静的サイトジェネレーターは先ほどの画像のようなmd(マークダウン)形式のファイルをうまいことして、複雑なhtml形式に変換してくれます。<br>
+  　では実際に静的サイトジェネレーターである<strong>「hugo」</strong> をインストールしましょう。<br></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$brew</span> install hugo <span class="c1">#mac向けだぞ！winはwgetとか？</span></code></pre></div>
+<p>もしエラー起きたら多分Homebrew関連？ですかね。エラーがなければインストールが出来ました。<br>
+  　次に<strong>サイトの準備をします</strong>。<br>
+  hugoはテンプレートや様々なファイルを基にmdファイルをhtml形式に変換してくれます。その「<strong>様々なファイル</strong>」を次のコマンドで用意しましょう。<br></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$hugo</span> new site ファイル名</code></pre></div>
+<p>この「ファイル名」はサイト名とかとは一切関係ありません、自由につけて下さい。このコマンドを実行したらlsコマンドを打って下さい。先ほど入力したファイル名のディレクトリが作成されていたらOKです。<br>
+  　作成できていたら、そこに<strong>cd</strong>しましょう。<br>
+  <br></p>
+
+<h2 id="③-hugoのテーマを選ぶ">③ hugoのテーマを選ぶ</h2>
+
+<p>　テーマを探します。「hugo theme」とか「hugo テーマ」で調べてみて下さい。色々ありますね。できたら「exampleSite」的な<strong>例を含んだファイル</strong>を持っている物にして下さい。(以後このファイルを<strong>exampleファイル</strong>と呼びます)
+  <img src="/images/site/themesSearchScreenshot.jpg" alt="テーマ検索の写真" title="テーマ検索"></img>
+  この画像のURLは<a href="https://themes.gohugo.io/">こちら</a><br>
+  　気に入ったテーマのファイルをzipとかでインストールします。そして解凍するとそのテーマの名前のファイルが出てくると思います。そのファイルをコピーして、②で作成したディレクトリのthemesの中にペーストして下さい。<br>
+  　その後、今ペーストしたファイルの中のexampleファイルの中身をコピーして、②で作成したディレクトリに<strong>ペースト(上書き)</strong> して下さい。
+  ここまでくれば、②で作成したディレクトリに移動したのちに以下のコマンドを実行してみて下さい。<br></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$hugo</span> server -w</code></pre></div>
+<p>を実行して、ウェブブラウザで<strong>localhost:1313/</strong> を開いてみて下さい。止めるときはctrl+Cでできます。<br>
+  ここで失敗した人はもう一回全部消してやり直すのが良いかもしれません。(自分の場合はテーマを別のものに変えたらいい感じでいきました)<br>
+  　よかった、これでサイトのデータを作れるようになりましたね(強制)。<br>
+  　・・・ガバガバでごめんな、、許して、、。<br>
+  <br></p>
+
+<h2 id="④-gitの軽い説明">④ gitの軽い説明</h2>
+
+<p>　次は作ったデータを公開するためにgitに慣れましょう。個人のブログを想定して話をします。やることは3つ <strong>「addして、commitして、pushする」</strong> だけ。例えばfirst.md内のurlを変更した場合、こんな感じです。<br></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$git</span> add first.md
+<span class="ln">2</span>  <span class="nv">$git</span> commit -m <span class="s2">&#34;fixed URL in first.md&#34;</span>
+<span class="ln">3</span>  <span class="nv">$git</span> push</code></pre></div>
+<p>　本来、他にも色々あるのでしょうが、よく分からんので最低限をここに書きます。<br>
+  　後ろから順に解説します。まず<strong>「push」</strong> というのは、 <strong>「ローカルで変更した点を基に、インターネット上のデータも同様に変更する」</strong> 的な行為と思って下さい(ブランチとか初心者には複雑なので知らんぷりで今はOKでしょう)。<br>
+  　次にcommitの説明をしましょ。先ほど話した<strong>「ローカル(PC)で変更した点」をローカル上で記録する行為</strong>を<strong>commit</strong>すると言います。この行為はインターネット上にupするわけではありません。あくまで自身のパソコン上でまとめるだけです。&rdquo;-m&rdquo;でその変更自体に名前をつけられます。上の例では&rdquo;first.md内のurlを変更した&rdquo;という意味で&rdquo;fixed URL in first.md&rdquo;としました。<br>
+  　最後にaddについて話します。<strong>add</strong>は<strong>「変更を追加する行為」</strong> と思って下さい。上の例ではfirst.mdの中身を変更したのでfirst.mdをaddしました。逆に削除する場合は&rdquo;$git rm first.md&rdquo;でできるはずです。<br>
+  <br></p>
+
+<h2 id="⑤-githubpagesを用意する">⑤ githubPagesを用意する</h2>
+
+<p>　まずgithubに登録しましょ。<br>
+  　　<a href="https://github.com/">https://github.com/</a><br>
+  　次に画像の緑のNewボタンをクリック！<br>
+  <img src="/images/site/repoNew.jpg" alt="リポジトリのボタンの画像" title="リポジトリのボタン"></img>
+  　次にリポジトリ名を登録します。&rdquo;ユーザー名.github.io&rdquo;でにしましょう。私のユーザー名は「Gitefu」なので以下の画像のようになります。<br>
+  <img src="/images/site/repoMake.jpg" alt="リポジトリの設定の画像" title="リポジトリの設定"></img>
+  そしたらリポジトリ完成です。<br>
+  　次にローカルに環境を構築します。②で作成したディレクトリをターミナルで開いて下さい。そこでまずgithubの設定をしましょう。<br></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$git</span> config --global user.name <span class="s2">&#34;[ユーザー名]&#34;</span>
+<span class="ln">2</span>  <span class="nv">$git</span> config --global user.email <span class="s2">&#34;[登録したメールアドレス]&#34;</span></code></pre></div>
+<p>これでユーザーは変更されました。次に<strong>公開するため</strong>に先ほど作成したリポジトリとローカルのディレクトリを紐付けしていきましょう。<br>
+  　まずはpublicへ移動しましょう。(publicの中身を公開したいので)</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$cd</span> public</code></pre></div>
+<p>次にここをリポジトリと紐付けしましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$git</span> clone <span class="o">[</span>URL<span class="o">]</span> <span class="c1">#今回はhttps://github.com/[ユーザー名]/[ユーザー名].github.io.git</span></code></pre></div>
+<p>これで準備できました。<br>
+  <br></p>
+
+<h2 id="⑥-hugoで作ったサイトをgitを用いて公開する">⑥ hugoで作ったサイトをgitを用いて公開する</h2>
+
+<p>　まずは②で作成したディレクトリに移動しましょう。<br>
+  　次に記事の追加をしてみましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$hugo</span> new posts/記事名.md <span class="c1">#たまにpost/記事名.mdの場合もあるので要確認</span></code></pre></div>
+<p>これでmdファイルが作成されました。ちなみに<strong>勝手にmdファイルを作ったり移動したりすると、ジェネレーターはうまく変換してくれません！絶対&rdquo;hugo new&rdquo;を使いましょう！</strong><br>
+  　作成したmdファイルを開いてexampleファイルの中の記事を基に好きに変更して保存しましょう。<br>
+  もし日本語を適応したいのであれば、現在のディレクトリのconfig.tomlに以下を追加すれば良いかと思います。</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="ln">1</span>  <span class="nx">defaultContentLanguage</span> <span class="p">=</span> <span class="s2">&#34;jp&#34;</span></code></pre></div>
+<p>記事を追加したら①のようにして確認してみましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$hugo</span> server -w</code></pre></div>
+<p>どうですかね。。？できてます。。？<br>
+  んでできたらCtrl+Cで止めて下さい。<br>
+  　止めたら次に改めてジェネレータにhtmlに変換してもらいましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$hugo</span> --cleanDestinationDir</code></pre></div>
+<p>これでpublicファイルに変更されたファイルが書き起こされたはずです。<br>
+  　最後にpublicに移動してaddしてcommitしてpushすればいいはずです。(削除等は今後慣れたらうまくやって下さい。)</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="ln">1</span>  <span class="nv">$cd</span> public
+<span class="ln">2</span>  <span class="nv">$git</span> add *
+<span class="ln">3</span>  <span class="nv">$git</span> commit -m <span class="s2">&#34;add new page&#34;</span>
+<span class="ln">4</span>  <span class="nv">$git</span> push</code></pre></div>
+<p>これで多分うまくできました。<br>
+  私（ユーザー名Gitefu）の場合は<a href="https://gitefu.github.io/">https://gitefu.github.io/</a>で開きます。皆さんの場合は[https://[ユーザー名].github.io/]かと思います。<br><br></p>
+
+<h1 id="できました">・・・できました？</h1>
+
+<p>　説明って難しいですね。最初にも言ったように、忘れないうちにと思って慌てて書いたので鵜呑みにはしない方が良いでしょう(すみません)。僕なりに頑張ったので許して。
+  <br><br><br></p>
+
+  </article>
+
+  
+  
+    
+    <div class="author-card">
+    <div class="underline"></div>
+    <div class="author-box">
+      <div class="author-image"><img src="/images/blank-profile.png" /></div>
+      <div class="author-content">
+      <p class="author-title">Author</p>
+      <p class="author-name">tanaka</p>
+      <p class="author-desc"><p>20歳・大学生<br>好きなコンテンツ・・・アイドルコネクト<br>好きなキャラ　　・・・森久保乃々<br><p>所属<br>・<a href="https://tofunology.github.io/site/" target="_blank">tofunology</a><br>・Lightus燃焼班<br>・マイクロコンピューター部</p><p><a href = "https://twitter.com/nktanakat" target="_blank">Twitterはこちら</a></p></p>
+</p>
+      </div>
+    </div>
+  </div>
+    
+  
+  
+
+
+</div>
+
+  </main><div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="https://Gitefu.github.io/tags/">Tags</a></li>
+              
+              
+                <li><a href="https://Gitefu.github.io/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="https://Gitefu.github.io/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://twitter.com/nktanakat" rel="noopener" target="_blank">Twitter</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy;
+            Tanaka
+            2019
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
