@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="jp" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <meta charset="utf-8">
+  <title>初めての自作Arduinoライブラリ · たなかの森</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="はじめに このサイトは最低限 ・ArduinoIDEを用いた開発が多少できる って人向けに書いています。少々間違った言葉があっても悪しからず。 mo" />
+
+  <meta name="keywords" content="ロケット, Rocket, 電子工作, Arduino, tofunology, ものつくり, 宇宙, マイコン, コンピュータ, プログラミング" />
+
+<link rel="canonical" href="https://Gitefu.github.io/2019/12/05/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E4%BD%9Carduino%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA/" />
+
+<head>
+  <link rel="icon" type="image/png" href="https://Gitefu.github.io/images/favicon_32x32.jpg" />
+  <link rel="apple-touch-icon" href="https://Gitefu.github.io/images/favicon_152x152.jpg">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://Gitefu.github.io/css/den.css">
+
+
+
+
+<meta property="og:title" content="初めての自作Arduinoライブラリ" />
+<meta property="og:description" content="はじめに このサイトは最低限 ・ArduinoIDEを用いた開発が多少できる って人向けに書いています。少々間違った言葉があっても悪しからず。 mo" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Gitefu.github.io/2019/12/05/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E4%BD%9Carduino%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA/" />
+<meta property="article:published_time" content="2019-12-05T13:09:19+09:00" />
+<meta property="article:modified_time" content="2012-05-11T13:09:20+09:00" />
+<meta itemprop="name" content="初めての自作Arduinoライブラリ">
+<meta itemprop="description" content="はじめに このサイトは最低限 ・ArduinoIDEを用いた開発が多少できる って人向けに書いています。少々間違った言葉があっても悪しからず。 mo">
+
+
+<meta itemprop="datePublished" content="2019-12-05T13:09:19&#43;09:00" />
+<meta itemprop="dateModified" content="2012-05-11T13:09:20&#43;09:00" />
+<meta itemprop="wordCount" content="2341">
+
+
+
+<meta itemprop="keywords" content="Arduino,電子工作," />
+
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+    <meta property="og:image" content="https://Gitefu.github.io/images/twitterImage.png"/>
+    <meta name="twitter:image:src" content="https://Gitefu.github.io/images/twitterImage.png"/>
+  
+  
+  <meta property="og:url" content="https://Gitefu.github.io/2019/12/05/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E4%BD%9Carduino%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="初めての自作Arduinoライブラリ - たなかの森"/>
+  <meta property="og:description" content="はじめに このサイトは最低限 ・ArduinoIDEを用いた開発が多少できる って人向けに書いています。少々間違った言葉があっても悪しからず。 mo"/>
+  
+  <meta name="twitter:title" content="初めての自作Arduinoライブラリ - たなかの森"/>
+  <meta name="twitter:description" content="はじめに このサイトは最低限 ・ArduinoIDEを用いた開発が多少できる って人向けに書いています。少々間違った言葉があっても悪しからず。 mo"/>
+  
+  <meta name="twitter:domain" content="gitefu.github.io"/>
+  <meta name="twitter:creator" content="@nkTanakaT"/>
+
+
+
+  
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://Gitefu.github.io/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="https://Gitefu.github.io/">
+      
+        
+        <img class="mr20 header-logo-image" src="https://Gitefu.github.io/images/globe.svg" alt="logo">
+        
+        
+          たなかの森
+        
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A">ものつくり</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88">イベント</a>
+              
+            
+          </li>
+        
+          <li class="nav-item">
+            
+              
+                <a class="nav-link" href="https://Gitefu.github.io/category/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+              
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">初めての自作Arduinoライブラリ</h1>
+        <p class="header-date">By
+          tanaka /
+        
+        2019-12-05
+          / In categories
+          <a href="https://Gitefu.github.io/category/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88/">イベント</a>
+        </p>
+        
+        <div class="header-underline"></div>
+        
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <a href="https://Gitefu.github.io/tag/arduino/">Arduino</a>,
+                <a href="https://Gitefu.github.io/tag/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/">電子工作</a>
+          </p>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <main>
+<div class="container content">
+  <article>
+  
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>　このサイトは最低限<br>
+　・ArduinoIDEを用いた開発が多少できる<br>
+って人向けに書いています。少々間違った言葉があっても悪しからず。<br></p>
+
+<h2 id="motorctrlライブラリを作ろう">motorCtrlライブラリを作ろう</h2>
+
+<p>　今回はテストとしてTA7291Pのようなモータードライバを用いてモーターを-100~100[%]で回すためのライブラリ「motorCtrl」を作成します。やることは以下の2つだけ。<br>
+　・&lt;.h&gt;と&lt;.cpp&gt;を入れるためのディレクトリを作成<br>
+　・&lt;.h&gt;と&lt;.cpp&gt;の作成<br></p>
+
+<h2 id="クラスの概念">クラスの概念</h2>
+
+<p>　作る前に少しクラスの話をしましょう．そんなに深く考えなくて良いです．クラスってのは<strong>&ldquo;パーツの設計図&rdquo;</strong> と思ってください．<br>
+　例えば今回の簡単なラジコンカーを作るとしましょう．
+<img src="/images/その他/makeArduinoLibrary/saibunka.png" alt="細分化した例の写真" title="ラジコンカーの構成"></img><br></p>
+
+<p>　図を見てください．ラジコンカーは軽い機能分けると「通信」と「車」ですね．さらに「車」を機能を細かくすると「モーターの制御」と「LEDランプの制御」ですかね(なんか車の目の部分ってLED？的なのついてますよね)．<br>
+　この場合はまず<strong>モーター制御クラス</strong>と<strong>LED制御クラス</strong>を作成します．次にこの2つのクラスを使って<strong>車クラス</strong>を作る訳です．さらに<strong>無線制御クラス</strong>も用意してしまえば，車クラスと無線制御クラスを組み合わせてラジコンカーのプログラムを作成できますね．<br>
+　「クラスというのは<strong>パーツの設計図</strong>」と最初に言いました．その意味がなんとなくでも掴めたらOKかなと思います．</p>
+
+<hr />
+
+<h2 id="準備">準備</h2>
+
+<p>　以下の2つかな。<br>
+　・製作したArduinoのファイルが(デフォルトで)保存されるディレクトリはどこか把握する<br>
+　　(俺の場合はC:Documents/Arduinoでした。) <br>
+　・外部エディタを準備する<br>
+　　(win:VisualStudioCodeなど、mac:CotEditorなど)<br>
+　　(ファイルの中身を書き書きできればいい)<br></p>
+
+<h2 id="arduinoライブラリの構造">Arduinoライブラリの構造</h2>
+
+<p>　以下のファイルで構成されています。<br>
+　<strong>・ヘッダーファイル&lt;.h&gt;<br>
+　・C++ファイル&lt;.cpp&gt;<br>
+　・テキストファイル&lt;keywords.txt&gt;<br></strong>
+<img src="/images/その他/makeArduinoLibrary/exampleLibrary.png" alt="ライブラリの構造の写真" title="ライブラリの構造"></img>
+一番下のkeywords.txtの役割は「IDE上でこのファイル内で登録したキーワードの色を変える」というもので、必要不可欠ではありません。今回は<strong>&lt;.h&gt;</strong> と <strong>&lt;.cpp&gt;</strong> を作ります。</p>
+
+<h2 id="ディレクトリの作成">ディレクトリの作成</h2>
+
+<p>　Arduino/librariesの中に「motorCtrl」という名前のディレクトリを作ってください（ディレクトリ名は中に入れる&lt;.h&gt;&lt;.cpp&gt;と<strong>同じ</strong>にする必要があります。）
+<img src="/images/その他/makeArduinoLibrary/makeFolder.png" alt="フォルダの作成の写真" title="フォルダの作成"></img><br></p>
+
+<h2 id="h-と-cpp">&lt;.h&gt;と&lt;.cpp&gt;</h2>
+
+<p>　ヘッダーファイル&lt;.h&gt;には<strong>宣言</strong>を．&lt;.cpp&gt;には<strong>中身</strong>を書いてください．<br>
+まあ一度作ればおそらくわかります．</p>
+
+<h2 id="motorctrl-hの作成">motorCtrl.hの作成</h2>
+
+<p>　先ほど作成した「motorCtrl」ディレクトリのなかに「motorCtrl.h」を作りましょう．</p>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="ln"> 1</span><span class="cp">#ifndef _MOTOR_CTRL_H_ </span><span class="c1">//インクルードガード(呪文でOK)
+</span><span class="ln"> 2</span><span class="c1"></span>  <span class="cp">#define _MOTOR_CTRL_H_
+</span><span class="ln"> 3</span><span class="cp"></span>  <span class="cp">#include</span> <span class="cpf">&#34;arduino.h&#34; //Arduinoのクラスを使うよってこと</span><span class="cp">
+</span><span class="ln"> 4</span><span class="cp"></span>  <span class="k">class</span> <span class="nc">motorCtrl</span><span class="p">{</span> <span class="c1">//クラス名はファイル名と同じに！
+</span><span class="ln"> 5</span><span class="c1"></span>    <span class="k">public</span><span class="o">:</span> <span class="c1">//クラスの外から使うモノはpublicに
+</span><span class="ln"> 6</span><span class="c1"></span>      <span class="n">motorCtrl</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">trueDirectionPinNum</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">falseDirectionPinNum</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pwmPinNum</span><span class="p">);</span> <span class="c1">//インスタンス
+</span><span class="ln"> 7</span><span class="c1"></span>      <span class="kt">void</span> <span class="nf">initialize</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">//初期化
+</span><span class="ln"> 8</span><span class="c1"></span>      <span class="kt">void</span> <span class="nf">use</span><span class="p">(</span><span class="kt">int</span> <span class="n">powerPercent</span><span class="p">);</span>  <span class="c1">//回転(いい関数名浮かばなかった(Arduinoは予約語もあるのでよく分からん))
+</span><span class="ln"> 9</span><span class="c1"></span>    <span class="k">private</span><span class="o">:</span> <span class="c1">//クラスの外から使わないモノはprivateに
+</span><span class="ln">10</span><span class="c1"></span>      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">tPin</span><span class="p">;</span>   <span class="c1">//正転信号のピン
+</span><span class="ln">11</span><span class="c1"></span>      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">fPin</span><span class="p">;</span>   <span class="c1">//逆転信号のピン
+</span><span class="ln">12</span><span class="c1"></span>      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pwmPin</span><span class="p">;</span> <span class="c1">//pwm信号のピン
+</span><span class="ln">13</span><span class="c1"></span>      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">convert2PWMSignal</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">powerPercent</span><span class="p">);</span><span class="c1">//0~100→255
+</span><span class="ln">14</span><span class="c1"></span>  <span class="p">};</span>
+<span class="ln">15</span><span class="cp">#endif
+</span></code></pre></div>
+<p>中身はこんな感じ．インスタンスはあとで説明します．</p>
+
+<h2 id="motorctrl-cppの作成">motorCtrl.cppの作成</h2>
+
+<p>　先ほど作成した「motorCtrl」ディレクトリのなかに「motorCtrl.cpp」を作りましょう．</p>
+<div class="highlight"><pre class="chroma"><code class="language-Arduino" data-lang="Arduino"><span class="ln"> 1</span><span class="cp">#include</span> <span class="cpf">&#34;motorCtrl.h&#34; //さっき作ったファイルを呼び出し</span><span class="cp">
+</span><span class="ln"> 2</span><span class="cp"></span><span class="cm">/* インスタンスの中身*/</span>
+<span class="ln"> 3</span><span class="n">motorCtrl</span><span class="o">::</span><span class="n">motorCtrl</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">trueDirectionPinNum</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">falseDirectionPinNum</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pwmPinNum</span><span class="p">){</span>
+<span class="ln"> 4</span>  <span class="n">tPin</span><span class="o">=</span><span class="n">trueDirectionPinNum</span><span class="p">;</span> <span class="c1">//privateな変数に保存
+</span><span class="ln"> 5</span><span class="c1"></span>  <span class="n">fPin</span><span class="o">=</span><span class="n">falseDirectionPinNum</span><span class="p">;</span> <span class="c1">//privateな変数に保存
+</span><span class="ln"> 6</span><span class="c1"></span>  <span class="n">pwmPin</span><span class="o">=</span><span class="n">pwmPinNum</span><span class="p">;</span> <span class="c1">//privateな変数に保存
+</span><span class="ln"> 7</span><span class="c1"></span><span class="p">}</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="cm">/* 初期化するための関数の中身*/</span>
+<span class="ln">10</span><span class="kt">void</span> <span class="n">motorCtrl</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="ln">11</span>  <span class="nf">pinMode</span><span class="p">(</span> <span class="n">tPin</span><span class="p">,</span> <span class="kc">OUTPUT</span><span class="p">);</span>
+<span class="ln">12</span>  <span class="nf">pinMode</span><span class="p">(</span> <span class="n">fPin</span><span class="p">,</span> <span class="kc">OUTPUT</span><span class="p">);</span>
+<span class="ln">13</span>  <span class="nf">pinMode</span><span class="p">(</span> <span class="n">pwmPin</span><span class="p">,</span> <span class="kc">OUTPUT</span><span class="p">);</span>
+<span class="ln">14</span><span class="p">}</span>
+<span class="ln">15</span>
+<span class="ln">16</span><span class="cm">/*  回転するための関数の中身
+</span><span class="ln">17</span><span class="cm">    powerPercentは-100〜100[%]を想定
+</span><span class="ln">18</span><span class="cm">*/</span>
+<span class="ln">19</span><span class="kt">void</span> <span class="n">motorCtrl</span><span class="o">::</span><span class="n">use</span><span class="p">(</span><span class="kt">int</span> <span class="n">powerPercent</span><span class="p">){</span>
+<span class="ln">20</span>  <span class="k">if</span><span class="p">(</span><span class="n">powerPercent</span><span class="o">&lt;-</span><span class="mi">100</span><span class="o">||</span><span class="n">powerPercent</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">)</span><span class="k">return</span><span class="p">;</span> <span class="c1">//範囲外なら実行しない
+</span><span class="ln">21</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">powerPercent</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span><span class="c1">//0以上なら正転．0未満なら逆転
+</span><span class="ln">22</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">powerPWMSignal</span><span class="p">;</span>
+<span class="ln">23</span>  <span class="k">if</span><span class="p">(</span><span class="n">direction</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span> <span class="c1">//正転なら
+</span><span class="ln">24</span><span class="c1"></span>    <span class="n">powerPWMSignal</span> <span class="o">=</span> <span class="n">convert2PWMSignal</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">powerPercent</span><span class="p">);</span> <span class="c1">//%からPWM信号へ
+</span><span class="ln">25</span><span class="c1"></span>    <span class="nf">digitalWrite</span><span class="p">(</span><span class="n">tPin</span><span class="p">,</span><span class="kc">HIGH</span><span class="p">);</span>
+<span class="ln">26</span>    <span class="nf">digitalWrite</span><span class="p">(</span><span class="n">fPin</span><span class="p">,</span> <span class="kc">LOW</span><span class="p">);</span>
+<span class="ln">27</span>    <span class="nf">analogWrite</span><span class="p">(</span><span class="n">pwmPin</span><span class="p">,</span><span class="n">powerPWMSignal</span><span class="p">);</span>
+<span class="ln">28</span>  <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//逆転なら
+</span><span class="ln">29</span><span class="c1"></span>    <span class="n">powerPWMSignal</span> <span class="o">=</span> <span class="n">convert2PWMSignal</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">powerPercent</span><span class="p">));</span> <span class="c1">//%からPWM信号へ
+</span><span class="ln">30</span><span class="c1"></span>    <span class="nf">digitalWrite</span><span class="p">(</span><span class="n">tPin</span><span class="p">,</span> <span class="kc">LOW</span><span class="p">);</span>
+<span class="ln">31</span>    <span class="nf">digitalWrite</span><span class="p">(</span><span class="n">fPin</span><span class="p">,</span><span class="kc">HIGH</span><span class="p">);</span>
+<span class="ln">32</span>    <span class="nf">analogWrite</span><span class="p">(</span><span class="n">pwmPin</span><span class="p">,</span><span class="n">powerPWMSignal</span><span class="p">);</span>
+<span class="ln">33</span>  <span class="p">}</span>
+<span class="ln">34</span><span class="p">}</span>
+<span class="ln">35</span>
+<span class="ln">36</span><span class="cm">/*  %をPWMに変換する
+</span><span class="ln">37</span><span class="cm">    powerPercentは0〜100[%]を想定
+</span><span class="ln">38</span><span class="cm">    戻り値は0〜255を想定
+</span><span class="ln">39</span><span class="cm">*/</span>
+<span class="ln">40</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">motorCtrl</span><span class="o">::</span><span class="n">convert2PWMSignal</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">powerPercent</span><span class="p">){</span>
+<span class="ln">41</span>  <span class="k">if</span><span class="p">(</span><span class="n">powerPercent</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">)</span><span class="k">return</span> <span class="mi">255</span><span class="p">;</span>
+<span class="ln">42</span>  <span class="k">return</span><span class="p">(</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(((</span><span class="kt">float</span><span class="p">)</span><span class="n">powerPercent</span> <span class="o">*</span> <span class="mf">255.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="mf">100.0</span><span class="p">))</span> <span class="p">);</span>
+<span class="ln">43</span><span class="p">}</span>
+</code></pre></div>
+<p>中身はこんな感じ．<br></p>
+
+<h2 id="ディレクトリの中身">ディレクトリの中身</h2>
+
+<p><img src="/images/その他/makeArduinoLibrary/seisakugo.png" alt=".hと.cppの入ったディレクトリの写真" title=".hと.cppの入ったディレクトリ"></img><br>
+　これで完成です．</p>
+
+<hr />
+
+<h2 id="テストプログラムの作成">テストプログラムの作成</h2>
+
+<p>　動作させるためにArduinoIDEで以下のプログラムを作成してコンパイルしてみてください．</p>
+<div class="highlight"><pre class="chroma"><code class="language-Arduino" data-lang="Arduino"><span class="ln"> 1</span><span class="cp">#include</span> <span class="cpf">&#34;motorCtrl.h&#34;</span><span class="cp">
+</span><span class="ln"> 2</span><span class="cp"></span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">MOTOR_TRUE_DIRECTION_PIN</span> <span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="ln"> 3</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">MOTOR_FALSE_DIRECTION_PIN</span> <span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+<span class="ln"> 4</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">MOTOR_PWM_PIN</span> <span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="ln"> 5</span><span class="n">motorCtrl</span> <span class="nf">motor</span><span class="p">(</span><span class="n">MOTOR_TRUE_DIRECTION_PIN</span><span class="p">,</span><span class="n">MOTOR_FALSE_DIRECTION_PIN</span><span class="p">,</span><span class="n">MOTOR_PWM_PIN</span><span class="p">);</span> <span class="c1">//インスタンス生成
+</span><span class="ln"> 6</span><span class="c1"></span><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln"> 7</span>  <span class="n">motor</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span> <span class="c1">//初期化
+</span><span class="ln"> 8</span><span class="c1"></span><span class="p">}</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">11</span>  <span class="n">motor</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="ln">12</span>  <span class="nf">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="ln">13</span>  <span class="n">motor</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="ln">14</span>  <span class="nf">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="ln">15</span>  <span class="n">motor</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="ln">16</span>  <span class="nf">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="ln">17</span>  <span class="n">motor</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">);</span>
+<span class="ln">18</span>  <span class="nf">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="ln">19</span>  <span class="n">motor</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+<span class="ln">20</span>  <span class="nf">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="ln">21</span>  <span class="n">motor</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="ln">22</span>  <span class="nf">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="ln">23</span>  <span class="cm">/*
+</span><span class="ln">24</span><span class="cm">   * 補足：publicのモノしかここからは呼び出せない！
+</span><span class="ln">25</span><span class="cm">   */</span>
+<span class="ln">26</span><span class="p">}</span>
+</code></pre></div>
+<p>コンパイル通れば完成です！(筆者(私)は通ったので通るはずです．)<br></p>
+
+<h2 id="インスタンスって何">インスタンスって何？</h2>
+
+<p>　インスタンスはクラス(パーツの設計図)を基に作成されたパーツ(実体)と思ってください．&lt;.h&gt;に宣言を書き，&lt;.cpp&gt;にその中身を書きました．これで設計図ができた訳ですから，インスタンス(実体)を生成して使う訳ですね．<br><br><br></p>
+
+<h1 id="こんな感じで終わり">こんな感じで終わり</h1>
+
+<p>　これをきっかけにぜひ少しずつオブジェクト指向調べてみてください．</p>
+
+  </article>
+
+  
+  
+    
+    <div class="author-card">
+    <div class="underline"></div>
+    <div class="author-box">
+      <div class="author-image"><img src="/images/blank-profile.png" /></div>
+      <div class="author-content">
+      <p class="author-title">Author</p>
+      <p class="author-name">tanaka</p>
+      <p class="author-desc"><p>20歳・大学生<br>好きなコンテンツ・・・アイドルコネクト<br>好きなキャラ　　・・・森久保乃々<br><p>所属<br>・<a href="https://tofunology.github.io/site/" target="_blank">tofunology</a><br>・Lightus燃焼班<br>・マイクロコンピューター部</p><p><a href = "https://twitter.com/nktanakat" target="_blank">Twitterはこちら</a></p></p>
+</p>
+      </div>
+    </div>
+  </div>
+    
+  
+  
+
+
+</div>
+
+  </main><div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="https://Gitefu.github.io/tags/">Tags</a></li>
+              
+              
+                <li><a href="https://Gitefu.github.io/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="https://Gitefu.github.io/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://twitter.com/nktanakat" rel="noopener" target="_blank">Twitter</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy;
+            Tanaka
+            2019
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
