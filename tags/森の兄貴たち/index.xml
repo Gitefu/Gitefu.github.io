@@ -25,5 +25,14 @@
       <description>C100のサークルに無事当選しました！ アイドルマスター シンデレラガールズのキャラの1人「佐久間まゆ」 と一緒にR言語を使ったデータ解析を行う本</description>
     </item>
     
+    <item>
+      <title>サイトをリニューアルしました</title>
+      <link>https://gitefu.github.io/blog/2022/start/notice/</link>
+      <pubDate>Thu, 21 Jul 2022 14:46:10 +0600</pubDate>
+      
+      <guid>https://gitefu.github.io/blog/2022/start/notice/</guid>
+      <description>サイトをリニューアルしました． 古い記事を削除し，再度整理して作り直そうかなと思います．</description>
+    </item>
+    
   </channel>
 </rss>
