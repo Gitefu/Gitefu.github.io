@@ -8,8 +8,10 @@ VERSION:	Versoin Number
 [TABLE OF CONTENTS]
 -------------------------------------------------------------------*/
 /*  typography */
+@import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Playfair+Display:400,700");
-@import url("https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,500,700&display=swap&subset=japanese");
+/* @import url("https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,500,700&display=swap&subset=japanese"); */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
 @font-face {
   font-family: 'hanskendrick';
   src: url("../fonts/hanskendrick-regular-webfont.woff") format("woff");
@@ -28,15 +30,33 @@ body {
 p, .paragraph {
   font-weight: 500;
   font-size: 18px;
-  line-height: 1.8;
-  font-family: 'Noto Serif JP', "Open Sans", sans-serif;
+  line-height: 1.5;
+  font-family:'Zen Kaku Gothic New', "Open Sans", sans-serif;
+  letter-spacing: 0.02em;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   color: #000000;
-  font-family: "hanskendrick";
-  font-weight: 600;
+  font-family: 'Zen Kaku Gothic New',"hanskendrick";
+  font-weight: 700;
   line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+.hero-section h1 {
+    color: #000000;
+    font-family: "hanskendrick";
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+.hero-section h2 {
+    color: #000000;
+    font-family: "hanskendrick";
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
 }
 
 h1, .h1 {
@@ -258,10 +278,45 @@ body {
   }
 }
 
-ol,
-ul {
-  list-style-type: none;
-  margin: 0px;
+article ol {
+    border: solid 2px #ffb03f;
+    padding: 0.5em 1em 0.5em 2.3em;
+    position: relative;
+    counter-reset: ol_li; /* ol_li カウンタをセットする(値もリセット) */
+}
+
+article  ol li {
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;/*ポチ消す*/
+}
+
+article ol li:before {
+    position: absolute;
+    counter-increment: ol_li; /* ol_li カウンタの値に1加える */
+    content: counter(ol_li)"."; /* before擬似要素のcontentで出力 */
+    left : 1em; /*左端からのアイコンまで*/
+    color: #ffb03f; /*アイコン色*/
+}
+
+article ul {
+    border: solid 2px #ffb03f;
+    padding: 0.5em 1em 0.5em 2.3em;
+    position: relative;
+}
+article ul li {
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;/*ポチ消す*/
+}
+
+article ul li:before {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900;
+    content: "\f00c";
+    position: absolute;
+    left : 1em; /*左端からのアイコンまで*/
+    color: #ffb03f; /*アイコン色*/
 }
 
 img {
@@ -839,8 +894,20 @@ blockquote {
   font-weight: 600;
 }
 
-.content * {
-  margin-bottom: 20px;
+.content h1{
+    margin-bottom: 20px;
+}
+.content h2{
+    margin-bottom: 20px;
+}
+.content h3{
+    margin-bottom: 20px;
+}
+.content h4{
+    margin-bottom: 20px;
+}
+.content h5{
+    margin-bottom: 20px;
 }
 
 .content img{
@@ -893,4 +960,64 @@ blockquote {
   height: 200px;
   width: 200px;
   object-fit: cover;
+}
+
+.highlight {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  padding: 2px 5px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.TableOfContents{
+  border: solid 2px #535353;
+  padding: 0.5em 1em 0.5em 1em;
+  margin-bottom: 2em;
+}
+.TableOfContents:hover{
+  border: solid 2px #ffb03f;
+  padding: 0.5em 1em 0.5em 1em;
+  margin-bottom: 2em;
+}
+
+.TableOfContents h4{
+  margin: 0em;
+}
+
+.TableOfContents ul {
+  border: none;
+  padding: 0.5em 0.5em 0.5em 2.4em;
+  margin: 0em;
+  position: relative;
+}
+.TableOfContents ul li {
+  padding: 0.2em 0;
+}
+
+.TableOfContents ul li:before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900;
+  content: "\f621";
+  position: absolute;
+  left : 1em; /*左端からのアイコンまで*/
+  color: #b6b6b6; /*アイコン色*/
+}
+
+.TableOfContents ul li:hover:before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900;
+  content: "\f621";
+  position: absolute;
+  left : 1em; /*左端からのアイコンまで*/
+  color: #ffb03f; /*アイコン色*/
+}
+
+td pre{
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.highlight{
+  background-color: #272822;
 }
