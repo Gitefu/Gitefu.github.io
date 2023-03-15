@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FPGA on Gitefu | Personal Site</title>
+    <link>https://gitefu.github.io/tags/fpga/</link>
+    <description>Recent content in FPGA on Gitefu | Personal Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Sat, 04 Mar 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/tags/fpga/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alveo U250からホストに文字列転送する話</title>
+      <link>https://gitefu.github.io/blog/2023/alveou250/how2debug/post1/</link>
+      <pubDate>Sat, 04 Mar 2023 14:46:10 +0600</pubDate>
+      
+      <guid>https://gitefu.github.io/blog/2023/alveou250/how2debug/post1/</guid>
+      <description>Virtual I/OをUARTの代わりに なんかAlveoU250でUARTが使えない うーん．なぜかAlveo U250でUARTが使えない． ただ文字を表示</description>
+    </item>
+    
+  </channel>
+</rss>
