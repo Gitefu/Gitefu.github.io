@@ -1146,26 +1146,26 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span><span style="color:#66d9ef">proc</span> make_clkwiz_module <span style="color:#66d9ef">{</span> <span style="color:#66d9ef">{</span> clkwiz_module_name <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span> clkwiz_ip_link <span style="color:#66d9ef">}}</span> <span style="color:#66d9ef">{</span>
 </span></span><span style="display:flex;"><span>    create_bd_design $clkwiz_module_name
-</span></span><span style="display:flex;"><span>    startgroup
 </span></span><span style="display:flex;"><span>    create_bd_cell <span style="color:#f92672">-</span>type ip <span style="color:#f92672">-</span>vlnv $clkwiz_ip_link clk_wiz_0
-</span></span><span style="display:flex;"><span>    endgroup
+</span></span><span style="display:flex;"><span>    set_property <span style="color:#f92672">-</span>dict <span style="color:#66d9ef">[</span>list CONFIG.PRIMITIVE <span style="color:#66d9ef">{</span>MMCM<span style="color:#66d9ef">}</span> CONFIG.CLK_IN1_BOARD_INTERFACE <span style="color:#66d9ef">{</span>default_300mhz_clk0<span style="color:#66d9ef">}</span> CONFIG.USE_LOCKED <span style="color:#66d9ef">{</span>false<span style="color:#66d9ef">}</span> CONFIG.USE_RESET <span style="color:#66d9ef">{</span>false<span style="color:#66d9ef">}</span> CONFIG.PRIM_SOURCE <span style="color:#66d9ef">{</span>Differential_clock_capable_pin<span style="color:#66d9ef">}</span> CONFIG.CLKIN1_JITTER_PS <span style="color:#66d9ef">{</span>33.330000000000005<span style="color:#66d9ef">}</span> CONFIG.CLKOUT1_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT2_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT3_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT4_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT5_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT6_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT7_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.FEEDBACK_SOURCE <span style="color:#66d9ef">{</span>FDBK_AUTO<span style="color:#66d9ef">}</span> CONFIG.MMCM_BANDWIDTH <span style="color:#66d9ef">{</span>OPTIMIZED<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKFBOUT_MULT_F <span style="color:#66d9ef">{</span>4.000<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKIN1_PERIOD <span style="color:#66d9ef">{</span>3.333<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKIN2_PERIOD <span style="color:#66d9ef">{</span>10.0<span style="color:#66d9ef">}</span> CONFIG.MMCM_COMPENSATION <span style="color:#66d9ef">{</span>AUTO<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKOUT0_DIVIDE_F <span style="color:#66d9ef">{</span>12.000<span style="color:#66d9ef">}</span> CONFIG.CLKOUT1_JITTER <span style="color:#66d9ef">{</span>101.475<span style="color:#66d9ef">}</span> CONFIG.CLKOUT1_PHASE_ERROR <span style="color:#66d9ef">{</span>77.836<span style="color:#66d9ef">}]</span> <span style="color:#66d9ef">[</span>get_bd_cells clk_wiz_0<span style="color:#66d9ef">]</span>
 </span></span><span style="display:flex;"><span>    set_property <span style="color:#f92672">-</span>dict <span style="color:#66d9ef">[</span>list <span style="color:#960050;background-color:#1e0010">\</span>
-</span></span><span style="display:flex;"><span>        CONFIG.PRIM_SOURCE <span style="color:#66d9ef">{</span>Differential_clock_capable_pin<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
-</span></span><span style="display:flex;"><span>        CONFIG.RESET_PORT <span style="color:#66d9ef">{</span>resetn<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
-</span></span><span style="display:flex;"><span>        CONFIG.RESET_TYPE <span style="color:#66d9ef">{</span>ACTIVE_LOW<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
-</span></span><span style="display:flex;"><span>        CONFIG.USE_LOCKED <span style="color:#66d9ef">{</span>false<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.CLKOUT1_JITTER <span style="color:#66d9ef">{</span>101.475<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.CLKOUT1_PHASE_ERROR <span style="color:#66d9ef">{</span>77.836<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.CLKOUT1_REQUESTED_OUT_FREQ <span style="color:#66d9ef">{</span>100<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.MMCM_CLKFBOUT_MULT_F <span style="color:#66d9ef">{</span>4.000<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.MMCM_CLKOUT0_DIVIDE_F <span style="color:#66d9ef">{</span>12.000<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.MMCM_DIVCLK_DIVIDE <span style="color:#66d9ef">{</span>1<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_cells clk_wiz_0<span style="color:#66d9ef">]</span>
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -----入力部分の接続--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    create_bd_port <span style="color:#f92672">-</span>dir I SYSCLK0_300_N
 </span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I SYSCLK0_300_P
-</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I SYSCLK0_300_N
-</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I rst_n
-</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir O <span style="color:#f92672">-</span>type clk CLK100MHZ
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports SYSCLK0_300_P<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_in1_p<span style="color:#66d9ef">]</span>
 </span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports SYSCLK0_300_N<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_in1_n<span style="color:#66d9ef">]</span>
-</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports rst_n<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>resetn<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports SYSCLK0_300_P<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_in1_p<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -----出力部分の接続--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    create_bd_port <span style="color:#f92672">-</span>dir O CLK100MHZ
 </span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports CLK100MHZ<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_out1<span style="color:#66d9ef">]</span>
-</span></span><span style="display:flex;"><span>    save_bd_design
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -----保存--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    save_bd_design
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -1340,6 +1340,19 @@
     
     <div class="media mb-4">
       <div class="post-thumb-sm mr-3">
+        <a href="https://gitefu.github.io/blog/2023/vivado/aboutmaxthreads/post/"><img class="mr-3 post-thumb-sm" src="https://gitefu.github.io/images/contents/2023/Vivado/aboutMaxthreads/thumb.jpg"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Mar 24, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="https://gitefu.github.io/blog/2023/vivado/aboutmaxthreads/post/">Vivadoツールでのマルチスレッドの話</a></h6>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
         <a href="https://gitefu.github.io/blog/2023/alveou250/how2debug/post1/"><img class="mr-3 post-thumb-sm" src="https://gitefu.github.io/images/contents/2023/AlveoU250/how2debug/design_draft.jpg"></a>
       </div>
       <div class="media-body">
@@ -1364,19 +1377,6 @@
       </div>
     </div>
     
-    <div class="media mb-4">
-      <div class="post-thumb-sm mr-3">
-        <a href="https://gitefu.github.io/blog/2022/mft/notice/"><img class="mr-3 post-thumb-sm" src="https://gitefu.github.io/images/contents/2022/MFT/machine_and_letter.webp"></a>
-      </div>
-      <div class="media-body">
-        <ul class="list-inline d-flex justify-content-between mb-2">
-          
-          <li class="list-inline-item">Aug 20, 2022</li>
-        </ul>
-        <h6><a class="text-dark" href="https://gitefu.github.io/blog/2022/mft/notice/">Maker Faire Tokyo 2022 に出展します</a></h6>
-      </div>
-    </div>
-    
   </div>
   <div class="widget">
     <h6 class="mb-4">TAG</h6>
@@ -1386,6 +1386,7 @@
       <li class="list-inline-item m-1"><a href="/tags/fpga/">Fpga</a></li>
       <li class="list-inline-item m-1"><a href="/tags/maker-faire-tokyo/">Maker faire tokyo</a></li>
       <li class="list-inline-item m-1"><a href="/tags/tofunology/">Tofunology</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/vivado/">Vivado</a></li>
       <li class="list-inline-item m-1"><a href="/tags/%e6%a3%ae%e3%81%ae%e5%85%84%e8%b2%b4%e3%81%9f%e3%81%a1/">森の兄貴たち</a></li>
     </ul>
   </div>

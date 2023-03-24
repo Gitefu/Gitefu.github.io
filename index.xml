@@ -6,7 +6,16 @@
     <description>Recent content on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 04 Mar 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Mar 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vivadoツールでのマルチスレッドの話</title>
+      <link>https://gitefu.github.io/blog/2023/vivado/aboutmaxthreads/post/</link>
+      <pubDate>Fri, 24 Mar 2023 14:46:10 +0600</pubDate>
+      
+      <guid>https://gitefu.github.io/blog/2023/vivado/aboutmaxthreads/post/</guid>
+      <description>内容について 2023.03.24時点の内容です． 公式ドキュメントに書いてあったので，メモしただけ． Vivado Design Suite ユーザー ガイド: インプリメンテーショ</description>
+    </item>
+    
     <item>
       <title>Alveo U250からホストに文字列転送する話</title>
       <link>https://gitefu.github.io/blog/2023/alveou250/how2debug/post1/</link>
