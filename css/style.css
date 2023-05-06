@@ -1021,3 +1021,15 @@ td pre{
 .highlight{
   background-color: #272822;
 }
+
+.background-orange{
+  background: #fdefe6;
+}
+
+.top_card {
+  box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
+  display: flex;
+  place-items: center;
+  text-align: center;
+  border-radius: 2ch;
+}
