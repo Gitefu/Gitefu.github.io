@@ -6,7 +6,16 @@
     <description>Recent content on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Mar 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Apr 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AlveoでDDR4 MIGのAXI_CTRLを消せなかった話</title>
+      <link>https://gitefu.github.io/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
+      <pubDate>Fri, 21 Apr 2023 14:46:10 +0600</pubDate>
+      
+      <guid>https://gitefu.github.io/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
+      <description>注意 この話のオチはAXI_CTRLは消せない(かも？)です． MIG (Memory Interface Generator) MIGはXilinxの提供するメモリインターファースの生成器みたいなやつ</description>
+    </item>
+    
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(2)</title>
       <link>https://gitefu.github.io/blog/2023/alveou250/xpm_memory_spram/post2/</link>
