@@ -1033,3 +1033,22 @@ td pre{
   text-align: center;
   border-radius: 2ch;
 }
+.top_card:hover {
+  box-shadow: 0 0.3rem 0.6rem hsl(0 0% 0% / 50%);
+  display: flex;
+  place-items: center;
+  text-align: center;
+  border-radius: 2ch;
+}
+.top_card_parent{
+  padding-left:3ch;
+  padding-right:3ch;
+  padding-top:1ch;
+  padding-bottom:1ch;
+}
+.top_card_parent:hover{
+  padding-left:4ch;
+  padding-right:4ch;
+  padding-top:2ch;
+  padding-bottom:2ch;
+}
