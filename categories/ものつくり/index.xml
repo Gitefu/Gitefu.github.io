@@ -6,7 +6,16 @@
     <description>Recent content in ものつくり on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Mar 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/categories/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jun 2023 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/categories/%E3%82%82%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VivadoのTCLコマンド：all_inputsとall_outputs</title>
+      <link>https://gitefu.github.io/blog/2023/vivado/tcl/inputs_outputs/</link>
+      <pubDate>Mon, 05 Jun 2023 14:46:10 +0600</pubDate>
+      
+      <guid>https://gitefu.github.io/blog/2023/vivado/tcl/inputs_outputs/</guid>
+      <description>はじめに なんか調べたら出てきたので，埋もれないようにメモ． 入出力のポート名を知るTCLコマンド all_inputsとall_outputsが</description>
+    </item>
+    
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(2)</title>
       <link>https://gitefu.github.io/blog/2023/alveou250/xpm_memory_spram/post2/</link>
