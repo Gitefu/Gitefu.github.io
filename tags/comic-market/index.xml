@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Comic Market on Gitefu | Personal Site</title>
-    <link>https://gitefu.github.io/tags/comic-market/</link>
+    <link>https://gitefu.com/tags/comic-market/</link>
     <description>Recent content in Comic Market on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 21 Dec 2022 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.github.io/tags/comic-market/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Dec 2022 14:46:10 +0600</lastBuildDate><atom:link href="https://gitefu.com/tags/comic-market/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C101で技術本を配布します</title>
-      <link>https://gitefu.github.io/blog/2022/c101/notice/</link>
+      <link>https://gitefu.com/blog/2022/c101/notice/</link>
       <pubDate>Wed, 21 Dec 2022 14:46:10 +0600</pubDate>
       
-      <guid>https://gitefu.github.io/blog/2022/c101/notice/</guid>
+      <guid>https://gitefu.com/blog/2022/c101/notice/</guid>
       <description>C101のサークルに無事当選しました！ アイドルマスター シャイニーカラーズのキャラの1人「園田智代子」 と一緒にフィルタ処理を学ぶ本を頒布します</description>
     </item>
     
     <item>
       <title>C100で技術本を配布します</title>
-      <link>https://gitefu.github.io/blog/2022/c100/notice/</link>
+      <link>https://gitefu.com/blog/2022/c100/notice/</link>
       <pubDate>Sat, 13 Aug 2022 14:46:10 +0600</pubDate>
       
-      <guid>https://gitefu.github.io/blog/2022/c100/notice/</guid>
+      <guid>https://gitefu.com/blog/2022/c100/notice/</guid>
       <description>C100のサークルに無事当選しました！ アイドルマスター シンデレラガールズのキャラの1人「佐久間まゆ」 と一緒にR言語を使ったデータ解析を行う本</description>
     </item>
     
