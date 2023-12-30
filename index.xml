@@ -2,129 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gitefu | Personal Site</title>
-    <link>https://gitefu.com/</link>
+    <link>https://www.gitefu.com/</link>
     <description>Recent content on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Mon, 21 Aug 2023 14:46:10 +0600</lastBuildDate>
-    <atom:link href="https://gitefu.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.gitefu.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MakerFaireTokyo 2023に出展します！</title>
-      <link>https://gitefu.com/blog/2023/makerfairetokyo/notice/</link>
+      <link>https://www.gitefu.com/blog/2023/makerfairetokyo/notice/</link>
       <pubDate>Mon, 21 Aug 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/makerfairetokyo/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2023/makerfairetokyo/notice/</guid>
       <description>昨年度の出展の進化verを出展！ 【 筆跡根絶！「予告状マシン」】 新聞紙の文字で作る、あの「予告状」を自動で作成する機械を作りました！ 切断・糊付</description>
     </item>
     <item>
       <title>VivadoのTCLコマンド：all_inputsとall_outputs</title>
-      <link>https://gitefu.com/blog/2023/vivado/tcl/inputs_outputs/</link>
+      <link>https://www.gitefu.com/blog/2023/vivado/tcl/inputs_outputs/</link>
       <pubDate>Mon, 05 Jun 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/vivado/tcl/inputs_outputs/</guid>
+      <guid>https://www.gitefu.com/blog/2023/vivado/tcl/inputs_outputs/</guid>
       <description>はじめに なんか調べたら出てきたので，埋もれないようにメモ． 入出力のポート名を知るTCLコマンド all_inputsとall_outputsが</description>
     </item>
     <item>
       <title>AlveoでDDR4 MIGのAXI_CTRLを消せなかった話</title>
-      <link>https://gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
       <pubDate>Fri, 21 Apr 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
       <description>注意 この話のオチはAXI_CTRLは消せない(かも？)です． MIG (Memory Interface Generator) MIGはXilinxの提供するメモリインターファースの生成器みたいなやつ</description>
     </item>
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(2)</title>
-      <link>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</link>
       <pubDate>Sun, 26 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</guid>
       <description>前回 ドキュメントを読んだ． 前回の記事：Alveo U250でXPM_MEMORY_SPRAMを使いたい(1) githubのソースを使ってみる g</description>
     </item>
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(1)</title>
-      <link>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</link>
       <pubDate>Fri, 24 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</guid>
       <description>Alveo U250でXPM_MEMORY_SPRAMを使いたい ちょっとAlveo U250でRAMを指定のファイルで初期化することにした． Alveo U250は</description>
     </item>
     <item>
       <title>Vivadoツールでのマルチスレッドの話</title>
-      <link>https://gitefu.com/blog/2023/vivado/aboutmaxthreads/post/</link>
+      <link>https://www.gitefu.com/blog/2023/vivado/aboutmaxthreads/post/</link>
       <pubDate>Fri, 24 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/vivado/aboutmaxthreads/post/</guid>
+      <guid>https://www.gitefu.com/blog/2023/vivado/aboutmaxthreads/post/</guid>
       <description>内容について 2023.03.24時点の内容です． 公式ドキュメントに書いてあったので，メモしただけ． Vivado Design Suite ユーザー ガイド: インプリメンテーショ</description>
     </item>
     <item>
       <title>Alveo U250からホストに文字列転送する話</title>
-      <link>https://gitefu.com/blog/2023/alveou250/how2debug/post1/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/how2debug/post1/</link>
       <pubDate>Sat, 04 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2023/alveou250/how2debug/post1/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/how2debug/post1/</guid>
       <description>Virtual I/OをUARTの代わりに なんかAlveoU250でUARTが使えない うーん．なぜかAlveo U250でUARTが使えない． ただ文字を表示</description>
     </item>
     <item>
       <title>C101で技術本を配布します</title>
-      <link>https://gitefu.com/blog/2022/c101/notice/</link>
+      <link>https://www.gitefu.com/blog/2022/c101/notice/</link>
       <pubDate>Wed, 21 Dec 2022 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2022/c101/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2022/c101/notice/</guid>
       <description>C101のサークルに無事当選しました！ アイドルマスター シャイニーカラーズのキャラの1人「園田智代子」 と一緒にフィルタ処理を学ぶ本を頒布します</description>
     </item>
     <item>
       <title>Maker Faire Tokyo 2022 に出展します</title>
-      <link>https://gitefu.com/blog/2022/mft/notice/</link>
+      <link>https://www.gitefu.com/blog/2022/mft/notice/</link>
       <pubDate>Sat, 20 Aug 2022 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2022/mft/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2022/mft/notice/</guid>
       <description>私の所属するモノつくり団体tofunologyはMaker Faire Tokyo 2022に出展します！ MakerFaireTokyo2022は毎年ビッグサイト</description>
     </item>
     <item>
       <title>C100で技術本を配布します</title>
-      <link>https://gitefu.com/blog/2022/c100/notice/</link>
+      <link>https://www.gitefu.com/blog/2022/c100/notice/</link>
       <pubDate>Sat, 13 Aug 2022 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2022/c100/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2022/c100/notice/</guid>
       <description>C100のサークルに無事当選しました！ アイドルマスター シンデレラガールズのキャラの1人「佐久間まゆ」 と一緒にR言語を使ったデータ解析を行う本</description>
     </item>
     <item>
       <title>サイトをリニューアルしました</title>
-      <link>https://gitefu.com/blog/2022/start/notice/</link>
+      <link>https://www.gitefu.com/blog/2022/start/notice/</link>
       <pubDate>Thu, 21 Jul 2022 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/blog/2022/start/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2022/start/notice/</guid>
       <description>サイトをリニューアルしました． 古い記事を削除し，再度整理して作り直そうかなと思います．</description>
     </item>
     <item>
       <title>Hello, I’m Gitefu</title>
-      <link>https://gitefu.com/about/</link>
+      <link>https://www.gitefu.com/about/</link>
       <pubDate>Tue, 14 May 2019 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.com/about/</guid>
+      <guid>https://www.gitefu.com/about/</guid>
       <description>ぎてふ(別名：たなか)は同人サークルで技術書を作ったり，ものつくりサークルでロボット作ったり，色々しています． 2023現在，とある大学の大学</description>
     </item>
     <item>
       <title>Homepage 1</title>
-      <link>https://gitefu.com/homepage/home-1/</link>
+      <link>https://www.gitefu.com/homepage/home-1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://gitefu.com/homepage/home-1/</guid>
+      <guid>https://www.gitefu.com/homepage/home-1/</guid>
       <description></description>
     </item>
     <item>
       <title>Search Result</title>
-      <link>https://gitefu.com/search/</link>
+      <link>https://www.gitefu.com/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://gitefu.com/search/</guid>
+      <guid>https://www.gitefu.com/search/</guid>
       <description>　</description>
     </item>
     <item>
       <title>ものつくり - Fabrication</title>
-      <link>https://gitefu.com/top/fabrication/</link>
+      <link>https://www.gitefu.com/top/fabrication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://gitefu.com/top/fabrication/</guid>
+      <guid>https://www.gitefu.com/top/fabrication/</guid>
       <description>tofunology tofunologyは私の出身工業高校の卒業生で結成した完全趣味のモノづくりサークルです。 モノづくりの楽しさを求めて再結集したこともあり，</description>
     </item>
     <item>
       <title>技術本 - Tech. Books</title>
-      <link>https://gitefu.com/top/techbook/</link>
+      <link>https://www.gitefu.com/top/techbook/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://gitefu.com/top/techbook/</guid>
+      <guid>https://www.gitefu.com/top/techbook/</guid>
       <description>&amp;ldquo;森の兄貴たち&amp;rdquo; で 活動中 「森の兄貴たち」は3人のメンバーで構成された技術系の同人サークルです． 同人誌の即売会等で2次</description>
     </item>
     <item>
       <title>研究活動 - Studies</title>
-      <link>https://gitefu.com/top/study/</link>
+      <link>https://www.gitefu.com/top/study/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://gitefu.com/top/study/</guid>
+      <guid>https://www.gitefu.com/top/study/</guid>
       <description>Tomoaki Tanaka, Ryosuke Higashi, Hidetaro Tanaka, Takefumi Miyoshi, Yasunori Osana, Jubee Tada, Kiyofumi Tanaka, Hironori Nakajo, &amp;ldquo;Shared Vector Register of RISC-V for the Future Hardware Acceleration&amp;rdquo;, Sixth Workshop on Computer Architecture Research with RISC-V (CARRV 2022), 19th June, 2022, N.Y., co-located with ISCA 2022 田中友章, 東良輔, 田中清史, 長名保範, 三好健文, 多田</description>
     </item>
   </channel>
