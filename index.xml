@@ -6,14 +6,28 @@
     <description>Recent content on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 21 Aug 2023 14:46:10 +0600</lastBuildDate>
+    <lastBuildDate>Sat, 30 Dec 2023 14:46:10 +0600</lastBuildDate>
     <atom:link href="https://gitefu.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C103で技術本を配布します</title>
+      <link>https://gitefu.com/blog/2023/c103/notice/</link>
+      <pubDate>Sat, 30 Dec 2023 14:46:10 +0600</pubDate>
+      <guid>https://gitefu.com/blog/2023/c103/notice/</guid>
+      <description>C103 二日目 東U19bにて，「佐々木千枝とFusion360する本」を頒布いたします！ 詳しくはこちら</description>
+    </item>
     <item>
       <title>MakerFaireTokyo 2023に出展します！</title>
       <link>https://gitefu.com/blog/2023/makerfairetokyo/notice/</link>
       <pubDate>Mon, 21 Aug 2023 14:46:10 +0600</pubDate>
       <guid>https://gitefu.com/blog/2023/makerfairetokyo/notice/</guid>
       <description>昨年度の出展の進化verを出展！ 【 筆跡根絶！「予告状マシン」】 新聞紙の文字で作る、あの「予告状」を自動で作成する機械を作りました！ 切断・糊付</description>
+    </item>
+    <item>
+      <title>C102で技術本を配布します</title>
+      <link>https://gitefu.com/blog/2023/c102/notice/</link>
+      <pubDate>Mon, 14 Aug 2023 14:46:10 +0600</pubDate>
+      <guid>https://gitefu.com/blog/2023/c102/notice/</guid>
+      <description>C102 二日目 西か02bにて，「佐久間まゆとはじめる無線マイコン|ESP-WROOM-32」を頒布いたします！ 詳しくはこちら</description>
     </item>
     <item>
       <title>VivadoのTCLコマンド：all_inputsとall_outputs</title>
