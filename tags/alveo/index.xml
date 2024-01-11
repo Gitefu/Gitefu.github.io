@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Alveo on Gitefu | Personal Site</title>
-    <link>https://www.gitefu.com/tags/alveo/</link>
+    <link>https://gitefu.com/tags/alveo/</link>
     <description>Recent content in Alveo on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Fri, 21 Apr 2023 14:46:10 +0600</lastBuildDate>
-    <atom:link href="https://www.gitefu.com/tags/alveo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://gitefu.com/tags/alveo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AlveoでDDR4 MIGのAXI_CTRLを消せなかった話</title>
-      <link>https://www.gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
+      <link>https://gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
       <pubDate>Fri, 21 Apr 2023 14:46:10 +0600</pubDate>
-      <guid>https://www.gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
+      <guid>https://gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
       <description>注意 この話のオチはAXI_CTRLは消せない(かも？)です． MIG (Memory Interface Generator) MIGはXilinxの提供するメモリインターファースの生成器みたいなやつ</description>
     </item>
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(2)</title>
-      <link>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</link>
+      <link>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</link>
       <pubDate>Sun, 26 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</guid>
+      <guid>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</guid>
       <description>前回 ドキュメントを読んだ． 前回の記事：Alveo U250でXPM_MEMORY_SPRAMを使いたい(1) githubのソースを使ってみる g</description>
     </item>
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(1)</title>
-      <link>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</link>
+      <link>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</link>
       <pubDate>Fri, 24 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</guid>
+      <guid>https://gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</guid>
       <description>Alveo U250でXPM_MEMORY_SPRAMを使いたい ちょっとAlveo U250でRAMを指定のファイルで初期化することにした． Alveo U250は</description>
     </item>
     <item>
       <title>Alveo U250からホストに文字列転送する話</title>
-      <link>https://www.gitefu.com/blog/2023/alveou250/how2debug/post1/</link>
+      <link>https://gitefu.com/blog/2023/alveou250/how2debug/post1/</link>
       <pubDate>Sat, 04 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>https://www.gitefu.com/blog/2023/alveou250/how2debug/post1/</guid>
+      <guid>https://gitefu.com/blog/2023/alveou250/how2debug/post1/</guid>
       <description>Virtual I/OをUARTの代わりに なんかAlveoU250でUARTが使えない うーん．なぜかAlveo U250でUARTが使えない． ただ文字を表示</description>
     </item>
   </channel>
