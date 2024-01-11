@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Gitefu | Personal Site</title>
-    <link>https://gitefu.github.io/tags/</link>
+    <link>https://gitefu.com/tags/</link>
     <description>Recent content in Tags on Gitefu | Personal Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Sat, 30 Dec 2023 14:46:10 +0600</lastBuildDate>
-    <atom:link href="https://gitefu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://gitefu.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Comic Market</title>
-      <link>https://gitefu.github.io/tags/comic-market/</link>
+      <link>https://gitefu.com/tags/comic-market/</link>
       <pubDate>Sat, 30 Dec 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/comic-market/</guid>
+      <guid>https://gitefu.com/tags/comic-market/</guid>
       <description></description>
     </item>
     <item>
       <title>森の兄貴たち</title>
-      <link>https://gitefu.github.io/tags/%E6%A3%AE%E3%81%AE%E5%85%84%E8%B2%B4%E3%81%9F%E3%81%A1/</link>
+      <link>https://gitefu.com/tags/%E6%A3%AE%E3%81%AE%E5%85%84%E8%B2%B4%E3%81%9F%E3%81%A1/</link>
       <pubDate>Sat, 30 Dec 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/%E6%A3%AE%E3%81%AE%E5%85%84%E8%B2%B4%E3%81%9F%E3%81%A1/</guid>
+      <guid>https://gitefu.com/tags/%E6%A3%AE%E3%81%AE%E5%85%84%E8%B2%B4%E3%81%9F%E3%81%A1/</guid>
       <description></description>
     </item>
     <item>
       <title>Maker Faire Tokyo</title>
-      <link>https://gitefu.github.io/tags/maker-faire-tokyo/</link>
+      <link>https://gitefu.com/tags/maker-faire-tokyo/</link>
       <pubDate>Mon, 21 Aug 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/maker-faire-tokyo/</guid>
+      <guid>https://gitefu.com/tags/maker-faire-tokyo/</guid>
       <description></description>
     </item>
     <item>
       <title>tofunology</title>
-      <link>https://gitefu.github.io/tags/tofunology/</link>
+      <link>https://gitefu.com/tags/tofunology/</link>
       <pubDate>Mon, 21 Aug 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/tofunology/</guid>
+      <guid>https://gitefu.com/tags/tofunology/</guid>
       <description></description>
     </item>
     <item>
       <title>FPGA</title>
-      <link>https://gitefu.github.io/tags/fpga/</link>
+      <link>https://gitefu.com/tags/fpga/</link>
       <pubDate>Mon, 05 Jun 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/fpga/</guid>
+      <guid>https://gitefu.com/tags/fpga/</guid>
       <description></description>
     </item>
     <item>
       <title>Vivado</title>
-      <link>https://gitefu.github.io/tags/vivado/</link>
+      <link>https://gitefu.com/tags/vivado/</link>
       <pubDate>Mon, 05 Jun 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/vivado/</guid>
+      <guid>https://gitefu.com/tags/vivado/</guid>
       <description></description>
     </item>
     <item>
       <title>Alveo</title>
-      <link>https://gitefu.github.io/tags/alveo/</link>
+      <link>https://gitefu.com/tags/alveo/</link>
       <pubDate>Fri, 21 Apr 2023 14:46:10 +0600</pubDate>
-      <guid>https://gitefu.github.io/tags/alveo/</guid>
+      <guid>https://gitefu.com/tags/alveo/</guid>
       <description></description>
     </item>
   </channel>
