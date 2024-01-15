@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ja-jp"><head>
+  <meta charset="utf-8">
+  <title>Alveo U250からホストに文字列転送する話</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AlveoU250でUARTを使いたいのに使えない．．．">
+  <meta name="author" content="Gitefu">
+  <meta name="generator" content="Hugo 0.121.1">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://gitefu.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://gitefu.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://gitefu.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  
+  <link rel="stylesheet" href="https://gitefu.com/css/style.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://gitefu.com/images/gitefu_favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://gitefu.com/images/gitefu_favicon.png " type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://gitefu.com/images/gitefu_favicon.png " type="image/x-icon" sizes="180x180">
+  
+  
+  <meta property="og:image" content="https://gitefu.com/images/contents/2023/AlveoU250/how2debug/design_draft.jpg" />
+  
+  <meta property="og:title" content="Alveo U250からホストに文字列転送する話" />
+<meta property="og:description" content="AlveoU250でUARTを使いたいのに使えない．．．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gitefu.com/blog/2023/alveou250/how2debug/post1/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-03-04T14:46:10+06:00" />
+<meta property="article:modified_time" content="2023-03-04T14:46:10+06:00" />
+
+
+  
+
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://gitefu.com/"><img class="img-fluid" src="https://gitefu.com/images/gitefu_logo.png" alt="Gitefu | Personal Site"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://gitefu.com/about/">About</a>
+        </li>
+        
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Activities
+          </a>
+          <div class="dropdown-menu" >
+            
+            <a class="dropdown-item" href="https://gitefu.com/top/study/">研究-Study</a>
+            
+            <a class="dropdown-item" href="https://gitefu.com/top/fabrication/">ものつくり-Fabrication</a>
+            
+            <a class="dropdown-item" href="https://gitefu.com/top/techbook/">技術本つくり-Tech.Book</a>
+            
+          </div>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://gitefu.com/tags/">Tags</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://gitefu.com//search/">
+        <input class="form-control px-0 w-100" type="search" placeholder="Search" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+
+
+<section class="section bg-secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h4>Alveo U250からホストに文字列転送する話</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          
+          <li class="list-inline-item"><i class="ti-calendar mr-2"></i>Mar 04, 2023</li>
+        </ul>
+          <article class="content">
+            <img src="https://gitefu.com/images/contents/2023/AlveoU250/how2debug/design_draft.jpg" alt="post-thumb" class="img-fluid rounded mr-5 mb-4">
+            
+              <div class="TableOfContents">
+                <h4>目次</h4>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#virtual-ioをuartの代わりに">Virtual I/OをUARTの代わりに</a></li>
+    <li><a href="#動作確認">動作確認</a></li>
+    <li><a href="#設計">設計</a></li>
+    <li><a href="#ディレクトリ構成">ディレクトリ構成</a></li>
+    <li><a href="#rtl">RTL</a></li>
+    <li><a href="#bitstream生成用のtclファイル">Bitstream生成用のTCLファイル</a></li>
+    <li><a href="#fpga上のvio出力を表示させるtclファイル">FPGA上のVIO(出力)を表示させるTCLファイル</a></li>
+    <li><a href="#結果">結果</a></li>
+    <li><a href="#まとめ">まとめ</a></li>
+  </ul>
+</nav>
+              </div>
+            
+            <h4 id="virtual-ioをuartの代わりに">Virtual I/OをUARTの代わりに</h4>
+<h5 id="なんかalveou250でuartが使えない">なんかAlveoU250でUARTが使えない</h5>
+<p>うーん．なぜか<a href="https://japan.xilinx.com/products/boards-and-kits/alveo/u250.html" target="_blank" rel="noopener">Alveo U250</a>でUARTが使えない．</p>
+<p>ただ文字を表示したいだけだし，UARTモジュールを実装してみたんだけど，動かなかった．
+なんでや！と思ってXDCファイルを更新したり，ドライバ再インスコしたり，再起動したり，色々したんだけど．．．
+困るのよねえ．何かtipsあれば<a href="https://twitter.com/tnk_make" target="_blank" rel="noopener">Twitter(@tnk_make)</a>で教えてください．．．</p>
+<h5 id="代わりにvirtual-ioを使う">代わりにVirtual I/Oを使う</h5>
+<p><del>マジで嫌々，仕方無〜〜〜く</del>UARTの代わりにVirtual IOで文字列の確認できないかなあと考えた．
+こんなクソ発想せずにUARTしたいんだが，，，．</p>
+<h5 id="virtual-io-ってなあに">Virtual I/O ってなあに</h5>
+<p>XilinxのVirtual Input/Output (VIO)についてのドキュメントは
+<a href="https://docs.xilinx.com/v/u/en-US/pg159-vio" target="_blank" rel="noopener">こちら(https://docs.xilinx.com/v/u/en-US/pg159-vio)</a>．</p>
+<p>フレームレートに関して，1msとか指定できるけど，なんかよくエラー吐くので使わないようにしよう．
+まあ<code>100ms</code>程度であれば問題ないかな．うーん，10Hzか．なんだこれ．</p>
+<hr>
+<h4 id="動作確認">動作確認</h4>
+<p>ひとまずこんな予定</p>
+<ol>
+<li>Arty S7で動かしてみる</li>
+<li>Alveo U250で動かしてみる</li>
+</ol>
+<p>まずは個人の持っている<a href="https://digilent.com/reference/programmable-logic/arty-s7/start" target="_blank" rel="noopener">Arty S7</a>で正しく動くことを確認する．</p>
+<p>その上でもしAlveoU250でうまく動かなければ，多分Clocking Wizardの使い方を間違えている．</p>
+<p>AlveoU250で動いたら，まあOK．</p>
+<hr>
+</br>
+<h4 id="設計">設計</h4>
+<p>設計はこんな感じ．Alveoではこの<code>CLK100MHz</code>に<a href="https://japan.xilinx.com/products/intellectual-property/clocking_wizard.html" target="_blank" rel="noopener">Clocking Wizard</a>を接続しようかな．</p>
+<p><img src="/images/contents/2023/AlveoU250/how2debug/design_draft.jpg" alt=""></p>
+</br>
+<h4 id="ディレクトリ構成">ディレクトリ構成</h4>
+<pre tabindex="0"><code>.
+├── consts
+│   ├── Arty-S7-50-Master.xdc
+│   └── alveo-u250-xdc.xdc
+├── rtls
+│   ├── clock_gen_for_vio.sv
+│   ├── dammy_rtl.sv
+│   ├── top_usb_uart_tx.sv
+│   ├── top_usb_uart_tx_with_clkwiz.sv
+│   └── tx_fifo.sv
+└── tcl
+    ├── build.tcl
+    ├── define.tcl
+    ├── show_vio.tcl
+    └── sources
+        ├── make_clocking_wizard_design.tcl
+        └── make_vio_design.tcl
+</code></pre></br>
+<h4 id="rtl">RTL</h4>
+<p><code>./rtls</code>の中身をそれぞれ解説しますわね．</p>
+<h5 id="clocking-wizardなしverのトップモジュール-top_usb_uart_txsv">Clocking Wizardなしverのトップモジュール (top_usb_uart_tx.sv)</h5>
+<p>Artyならこれを使う．</p>
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLK100MHZ</td>
+<td>1</td>
+<td>100MHzのクロック信号</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemverilog" data-lang="systemverilog"><span style="display:flex;"><span><span style="color:#66d9ef">module</span> top_usb_uart_tx  (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>  <span style="color:#66d9ef">logic</span>        CLK100MHZ
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> rst_n;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> CLK10HZ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [<span style="color:#ae81ff">31</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> tx_en_rtl;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] tx_rtl;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> tx_en_vio;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] tx_vio;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>design_1 #()vio(
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .tx_en(tx_en_vio),
+</span></span><span style="display:flex;"><span>    .tx(tx_vio)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tx_fifo tx_q(
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .clk_10hz_i(CLK10HZ),
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .tx_en_i(tx_en_rtl),
+</span></span><span style="display:flex;"><span>    .tx_i(tx_rtl),
+</span></span><span style="display:flex;"><span>    .tx_en_o(tx_en_vio),
+</span></span><span style="display:flex;"><span>    .tx_o(tx_vio)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>clock_gen_for_vio clk_gen(
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .clk_10hz_o(CLK10HZ)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dammy_rtl dammy(
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .tx_en_rtl(tx_en_rtl),
+</span></span><span style="display:flex;"><span>    .tx_rtl(tx_rtl)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endmodule</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</br>
+<h5 id="clocking-wizardありverのトップモジュール-top_usb_uart_tx_with_clkwizsv">Clocking Wizardありverのトップモジュール (top_usb_uart_tx_with_clkwiz.sv)</h5>
+<p>Clocking Wizardを使うver．Alveoで使う．</p>
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SYSCLK0_300_P</td>
+<td>1</td>
+<td>作動クロック信号のP</td>
+</tr>
+<tr>
+<td>SYSCLK0_300_N</td>
+<td>1</td>
+<td>作動クロック信号のN</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemverilog" data-lang="systemverilog"><span style="display:flex;"><span><span style="color:#66d9ef">module</span> top_usb_uart_tx_with_clkwiz  (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>  <span style="color:#66d9ef">logic</span>        SYSCLK0_300_P,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>  <span style="color:#66d9ef">logic</span>        SYSCLK0_300_N
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* ------追加----- */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> CLK100MHZ;
+</span></span><span style="display:flex;"><span>design_2 #()clkwiz(
+</span></span><span style="display:flex;"><span>    .SYSCLK0_300_P(SYSCLK0_300_P),
+</span></span><span style="display:flex;"><span>    .SYSCLK0_300_N(SYSCLK0_300_N),
+</span></span><span style="display:flex;"><span>    .CLK100MHZ(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* ------------- */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> rst_n;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> CLK10HZ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [<span style="color:#ae81ff">31</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> tx_en_rtl;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] tx_rtl;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> tx_en_vio;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] tx_vio;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>design_1 #()vio(
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .tx_en(tx_en_vio),
+</span></span><span style="display:flex;"><span>    .tx(tx_vio)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tx_fifo tx_q(
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .clk_10hz_i(CLK10HZ),
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .tx_en_i(tx_en_rtl),
+</span></span><span style="display:flex;"><span>    .tx_i(tx_rtl),
+</span></span><span style="display:flex;"><span>    .tx_en_o(tx_en_vio),
+</span></span><span style="display:flex;"><span>    .tx_o(tx_vio)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>clock_gen_for_vio clk_gen(
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .clk_10hz_o(CLK10HZ)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dammy_rtl dammy(
+</span></span><span style="display:flex;"><span>    .rst_n(rst_n),
+</span></span><span style="display:flex;"><span>    .clk_i(CLK100MHZ),
+</span></span><span style="display:flex;"><span>    .tx_en_rtl(tx_en_rtl),
+</span></span><span style="display:flex;"><span>    .tx_rtl(tx_rtl)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endmodule</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</br>
+<h5 id="適当なモジュール-dammy_rtlsv">適当なモジュール (dammy_rtl.sv)</h5>
+<p>とりあえずRTLの出力はこんな感じ．
+まあ<code>tx_rtl</code>も<code>tx_en_rtl</code>も出力できりゃあなんでもいいんですよねえ．
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rst_n</td>
+<td>1</td>
+<td>リセット信号．不論理</td>
+</tr>
+<tr>
+<td>clk_i</td>
+<td>1</td>
+<td>クロック信号</td>
+</tr>
+<tr>
+<td>tx_en_rtl</td>
+<td>1</td>
+<td>tx_dataが有効なら1</td>
+</tr>
+<tr>
+<td>tx_data_rtl</td>
+<td>8</td>
+<td>出力したい文字1個</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemverilog" data-lang="systemverilog"><span style="display:flex;"><span><span style="color:#66d9ef">module</span> dammy_rtl  (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>           rst_n,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>           clk_i,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">output</span>  <span style="color:#66d9ef">logic</span>           tx_en_rtl,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">output</span>  <span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>]  tx_rtl
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span> [<span style="color:#ae81ff">31</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>] cnt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">always_ff</span> @(<span style="color:#66d9ef">posedge</span> clk_i) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>rst_n)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        cnt         <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">32</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        tx_en_rtl   <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        tx_rtl      <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8&#39;h72</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">&lt;=</span> (cnt<span style="color:#f92672">!=</span><span style="color:#ae81ff">32&#39;hFFFFFFFF</span>)<span style="color:#f92672">?</span>cnt<span style="color:#f92672">+</span><span style="color:#ae81ff">32</span><span style="color:#ae81ff">&#39;b1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">32</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cnt<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">32</span><span style="color:#ae81ff">&#39;d100000</span> <span style="color:#f92672">&amp;&amp;</span> cnt<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">32</span><span style="color:#ae81ff">&#39;d100020</span> ) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            tx_en_rtl   <span style="color:#f92672">&lt;=</span> cnt[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>            tx_rtl      <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8&#39;h41</span> <span style="color:#f92672">+</span> {<span style="color:#ae81ff">7&#39;h0</span>,cnt[<span style="color:#ae81ff">0</span>]};
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            tx_en_rtl   <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>; 
+</span></span><span style="display:flex;"><span>            tx_rtl      <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8&#39;h43</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endmodule</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="virtual-ioの速度に合わせたクロック生成モジュール-clock_gen_for_viosv">Virtual I/Oの速度に合わせたクロック生成モジュール (clock_gen_for_vio.sv)</h5>
+<p>Virtual I/Oは<code>10Hz</code>で値を更新させるので，その速度に合わせたクロック信号を生成するモジュール．
+ちなみにArtyもAlveoもベースとなるクロック動作周波数は<code>100MHz</code>としましたわ．</p>
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rst_n</td>
+<td>1</td>
+<td>リセット信号．不論理</td>
+</tr>
+<tr>
+<td>clk_i</td>
+<td>1</td>
+<td>ベースとなるクロック信号(100MHz)</td>
+</tr>
+<tr>
+<td>clk_10hz_o</td>
+<td>1</td>
+<td>10Hzのクロック信号</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemverilog" data-lang="systemverilog"><span style="display:flex;"><span><span style="color:#66d9ef">module</span> clock_gen_for_vio  #(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">parameter</span> MASTER_CLK_HZ <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000</span>
+</span></span><span style="display:flex;"><span>)(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>  <span style="color:#66d9ef">logic</span>        rst_n,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>  <span style="color:#66d9ef">logic</span>        clk_i,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">output</span> <span style="color:#66d9ef">logic</span>        clk_10hz_o
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">localparam</span> CLK_CNT_MAX <span style="color:#f92672">=</span> (MASTER_CLK_HZ<span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">29</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>] cnt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">always_ff</span> @(<span style="color:#66d9ef">posedge</span> clk_i) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>rst_n)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        cnt         <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        clk_10hz_o  <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt<span style="color:#f92672">==</span>CLK_CNT_MAX)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            cnt         <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>            clk_10hz_o  <span style="color:#f92672">&lt;=</span> <span style="color:#f92672">~</span>clk_10hz_o;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            cnt         <span style="color:#f92672">&lt;=</span> cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">30</span><span style="color:#ae81ff">&#39;b1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endmodule</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="virtual-ioの出力データを貯めるfifo-tx_fifosv">Virtual I/Oの出力データを貯めるFIFO (tx_fifo.sv)</h5>
+<p>入力は100MHzのクロック信号に合わせて入るものとする．
+出力はVIOモジュールに合わせて10Hzです．</p>
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rst_n</td>
+<td>1</td>
+<td>リセット信号．不論理</td>
+</tr>
+<tr>
+<td>clk_i</td>
+<td>1</td>
+<td>ベースとなるクロック信号(100MHz)</td>
+</tr>
+<tr>
+<td>clk_10hz_i</td>
+<td>1</td>
+<td>10Hzのクロック信号</td>
+</tr>
+<tr>
+<td>tx_en_i</td>
+<td>1</td>
+<td>ダミーのモジュールから入力されたデータが有効か</td>
+</tr>
+<tr>
+<td>tx_i</td>
+<td>8</td>
+<td>ダミーのモジュールから入力されたデータ</td>
+</tr>
+<tr>
+<td>tx_en_o</td>
+<td>1</td>
+<td>出力するデータが有効か</td>
+</tr>
+<tr>
+<td>tx_o</td>
+<td>8</td>
+<td>出力するデータ</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemverilog" data-lang="systemverilog"><span style="display:flex;"><span><span style="color:#66d9ef">module</span> tx_fifo  (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>           rst_n,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>           clk_i,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>           clk_10hz_i,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>           tx_en_i,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">input</span>   <span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>]  tx_i,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">output</span>  <span style="color:#66d9ef">logic</span>           tx_en_o,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">output</span>  <span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>]  tx_o
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">7</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>] tx_ring_queue   [ <span style="color:#ae81ff">1023</span><span style="color:#f92672">:</span>  <span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">9</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>] queue_head;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   [ <span style="color:#ae81ff">9</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>] queue_tail;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   empty;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assign</span>  empty   <span style="color:#f92672">=</span> (queue_head <span style="color:#f92672">==</span> queue_tail)<span style="color:#f92672">?</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   full;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assign</span>  full <span style="color:#f92672">=</span> ((queue_tail<span style="color:#f92672">==</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;d0</span>) <span style="color:#f92672">&amp;&amp;</span> ( queue_head<span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;d1023</span>) )<span style="color:#f92672">?</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b1</span> <span style="color:#f92672">:</span>((queue_tail)<span style="color:#f92672">==</span>(queue_head<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;d1</span>))<span style="color:#f92672">?</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   clk_10hz_i_old;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">logic</span>   posedge_clk_10hz;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assign</span>  posedge_clk_10hz <span style="color:#f92672">=</span> ((clk_10hz_i<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b1</span>) <span style="color:#f92672">&amp;&amp;</span> (clk_10hz_i_old<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>))<span style="color:#f92672">?</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">always_ff</span> @(<span style="color:#66d9ef">posedge</span> clk_i) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>rst_n)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        queue_head <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>full)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tx_en_i)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            tx_ring_queue[queue_head]  <span style="color:#f92672">&lt;=</span> tx_i;
+</span></span><span style="display:flex;"><span>            queue_head                 <span style="color:#f92672">&lt;=</span> (queue_head<span style="color:#f92672">==</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;d1023</span>)<span style="color:#f92672">?</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;b0</span><span style="color:#f92672">:</span>(queue_head<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;b1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">always_ff</span> @(<span style="color:#66d9ef">posedge</span> clk_i) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>rst_n)<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        queue_tail  <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        tx_en_o     <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        tx_o        <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (posedge_clk_10hz) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (empty) <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            tx_en_o     <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>            tx_o        <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8</span><span style="color:#ae81ff">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>            tx_en_o     <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span><span style="color:#ae81ff">&#39;b1</span>;
+</span></span><span style="display:flex;"><span>            tx_o        <span style="color:#f92672">&lt;=</span> tx_ring_queue[queue_tail];
+</span></span><span style="display:flex;"><span>            queue_tail  <span style="color:#f92672">&lt;=</span> (queue_tail<span style="color:#f92672">==</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;d1023</span>)<span style="color:#f92672">?</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;b0</span><span style="color:#f92672">:</span>(queue_tail<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span><span style="color:#ae81ff">&#39;b1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    clk_10hz_i_old <span style="color:#f92672">&lt;=</span> clk_10hz_i;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endmodule</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+</br>
+<h4 id="bitstream生成用のtclファイル">Bitstream生成用のTCLファイル</h4>
+<h5 id="bitstream生成まで行うtclファイルbuildtcl">Bitstream生成まで行うTCLファイル（build.tcl）</h5>
+<p>デザインの作成からbitstream生成まで行うTCLファイル<code>build.tcl</code>はこんな感じ．
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> projectPath <span style="color:#66d9ef">[</span>file normalize <span style="color:#66d9ef">[</span>file dirname <span style="color:#66d9ef">[</span>file dirname <span style="color:#66d9ef">[</span>info script<span style="color:#66d9ef">]]]]</span>
+</span></span><span style="display:flex;"><span>cd $projectPath
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -----defineファイル追加-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>source <span style="color:#e6db74">&#34;$projectPath/tcl/define.tcl&#34;</span>  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># defineファイルを追加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----ソースファイル追加-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> sourceDir     <span style="color:#e6db74">&#34;$projectPath/tcl/sources&#34;</span>                  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># ソースファイルの置き場所
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> source_files  <span style="color:#66d9ef">[</span>glob <span style="color:#f92672">-</span>directory $sourceDir <span style="color:#f92672">-</span>type f <span style="color:#e6db74">&#34;*.tcl&#34;</span><span style="color:#66d9ef">];</span> <span style="color:#75715e"># ソースのTCLファイル追加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">foreach</span> f $source_files <span style="color:#66d9ef">{</span>
+</span></span><span style="display:flex;"><span>  source $f
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -----元のプロジェクトファイル削除-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#66d9ef">{[</span>file exists $outputDir<span style="color:#66d9ef">]</span> <span style="color:#f92672">==</span> 1<span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span>  <span style="color:#960050;background-color:#1e0010">;</span> <span style="color:#75715e"># プロジェクトファイルがあれば
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  file delete <span style="color:#f92672">-</span>force $outputDir       <span style="color:#66d9ef">;</span> <span style="color:#75715e"># プロジェクトファイルを削除
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -----プロジェクトの作成-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>create_project    $projectName $outputDir <span style="color:#f92672">-</span>part $partName <span style="color:#66d9ef">;</span> <span style="color:#75715e"># プロジェクトファイル作成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>update_ip_catalog <span style="color:#66d9ef">;</span>   <span style="color:#75715e"># IPカタログ更新
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----vio作成-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> vio_module_name <span style="color:#e6db74">&#34;design_1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> vio_ip_link     <span style="color:#e6db74">&#34;xilinx.com:ip:vio:3.0&#34;</span>
+</span></span><span style="display:flex;"><span>make_vio_module     $vio_module_name  $vio_ip_link <span style="color:#ae81ff">100000000</span>  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># VIOモジュール作成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----clkwiz作成-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> clkwiz_module_name  <span style="color:#e6db74">&#34;design_2&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> clkwiz_ip_link      <span style="color:#e6db74">&#34;xilinx.com:ip:clk_wiz:6.0&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#66d9ef">{</span> $need_clkwiz <span style="color:#f92672">==</span> 1 <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span>                                      <span style="color:#960050;background-color:#1e0010">;</span> <span style="color:#75715e"># Clocking Wizardが必要なら
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  make_clkwiz_module      $clkwiz_module_name  $clkwiz_ip_link  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Clocking Wizardを作成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -----RTLファイルの追加-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_files $rtl_directory                        <span style="color:#66d9ef">;</span> <span style="color:#75715e"># RTLファイル追加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_files <span style="color:#f92672">-</span>fileset constrs_1 $constraint_file   <span style="color:#66d9ef">;</span> <span style="color:#75715e"># xdcファイル追加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----トップモジュールの設定-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#66d9ef">{</span> $need_clkwiz <span style="color:#f92672">==</span> 1 <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span>                                          <span style="color:#960050;background-color:#1e0010">;</span> <span style="color:#75715e"># Clocking Wizardを使うなら
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  set_property top <span style="color:#e6db74">&#34;top_usb_uart_tx_with_clkwiz&#34;</span> <span style="color:#66d9ef">[</span>current_fileset<span style="color:#66d9ef">]</span>  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Clocking Wizardありverのトップモジュールを指定
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">{</span>                                                            <span style="color:#960050;background-color:#1e0010">;</span> <span style="color:#75715e"># そうでないなら
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  set_property top <span style="color:#e6db74">&#34;top_usb_uart_tx&#34;</span> <span style="color:#66d9ef">[</span>current_fileset<span style="color:#66d9ef">]</span>              <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Clocking Wizardなしverのトップモジュールを指定
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -----ファイルセットの更新-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>update_compile_order <span style="color:#f92672">-</span>fileset sources_1 <span style="color:#66d9ef">;</span> <span style="color:#75715e"># 更新
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----Run Synthesis-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>launch_runs synth_1 <span style="color:#f92672">-</span>jobs $howManyThread  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Synthesis実行開始
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>wait_on_run synth_1                       <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Synthesis実行終了待ち
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----Run Implementation-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>launch_runs impl_1  <span style="color:#f92672">-</span>jobs $howManyThread  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Run Implementation開始
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>wait_on_run impl_1                        <span style="color:#66d9ef">;</span> <span style="color:#75715e"># Run Implementation終了待ち
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----Generate bitstream-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>launch_runs impl_1 <span style="color:#f92672">-</span>to_step write_bitstream <span style="color:#f92672">-</span>jobs $howManyThread  <span style="color:#66d9ef">;</span> <span style="color:#75715e"># bitstream生成開始
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>wait_on_run impl_1                                                <span style="color:#66d9ef">;</span> <span style="color:#75715e"># bitstream終了待ち
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -----プロジェクトを閉じる-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>close_project</span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<h5 id="色々定義したtclファイルdefinetcl">色々定義したTCLファイル(define.tcl)</h5>
+<p>ここを変えればある程度？ボード変えてもいい？？本当か？？？(他のボードで試してないからわからん)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span><span style="color:#75715e"># -----変数-------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> howManyThread   <span style="color:#ae81ff">2</span>                       <span style="color:#66d9ef">;</span><span style="color:#75715e"># 実行時のスレッド数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> outputDir       <span style="color:#e6db74">&#34;$projectPath/output&#34;</span>   <span style="color:#66d9ef">;</span><span style="color:#75715e"># プロジェクトの出力先
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> projectName     <span style="color:#e6db74">&#34;vio_show_project&#34;</span>      <span style="color:#66d9ef">;</span><span style="color:#75715e"># プロジェクト名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> rtl_directory   <span style="color:#e6db74">&#34;$projectPath/rtls&#34;</span>     <span style="color:#66d9ef">;</span><span style="color:#75715e"># RTLファイルのディレクトリ
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># set constraint_file &#34;$projectPath/consts/Arty-S7-50-Master.xdc&#34; ;   # xdcファイルの設定/
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> constraint_file <span style="color:#e6db74">&#34;$projectPath/consts/alveo-u250-xdc.xdc&#34;</span>    <span style="color:#66d9ef">;</span>   <span style="color:#75715e"># xdcファイルの設定/
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># set partName        &#34;xc7s50csga324-1&#34;       ;# パーツ名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> partName        <span style="color:#e6db74">&#34;xcu250-figd2104-2L-e&#34;</span>  <span style="color:#66d9ef">;</span><span style="color:#75715e"># パーツ名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> hw_device_name  <span style="color:#e6db74">&#34;xc7s50_0&#34;</span>              <span style="color:#66d9ef">;</span><span style="color:#75715e"># デバイス名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> logfile         <span style="color:#e6db74">&#34;./output/vio.log&#34;</span>      <span style="color:#66d9ef">;</span><span style="color:#75715e"># ログファイルの保存先
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span> need_clkwiz     <span style="color:#ae81ff">1</span>                       <span style="color:#66d9ef">;</span><span style="color:#75715e">#</span><span style="color:#960050;background-color:#1e0010"> Clocking Wizardが必要なら1に</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="vioモジュール作成用のtclファイルmake_vio_designtcl">VIOモジュール作成用のTCLファイル(make_vio_design.tcl)</h5>
+<p>これでできるモジュールの入出力は次の通り．</p>
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rst_n</td>
+<td>1</td>
+<td>(出力)リセット信号．不論理</td>
+</tr>
+<tr>
+<td>clk_i</td>
+<td>1</td>
+<td>(入力)ベースとなるクロック信号(100MHz)</td>
+</tr>
+<tr>
+<td>tx_en_i</td>
+<td>1</td>
+<td>(入力)ダミーのモジュールから入力されたデータが有効か</td>
+</tr>
+<tr>
+<td>tx_i</td>
+<td>8</td>
+<td>(入力)ダミーのモジュールから入力されたデータ</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span><span style="color:#66d9ef">proc</span> make_vio_module <span style="color:#66d9ef">{</span> <span style="color:#66d9ef">{</span> vio_module_name <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span> vio_ip_link <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span> clock_speed_hz <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span>
+</span></span><span style="display:flex;"><span>    create_bd_design $vio_module_name
+</span></span><span style="display:flex;"><span>    startgroup
+</span></span><span style="display:flex;"><span>    create_bd_cell <span style="color:#f92672">-</span>type ip <span style="color:#f92672">-</span>vlnv $vio_ip_link vio_0
+</span></span><span style="display:flex;"><span>    endgroup
+</span></span><span style="display:flex;"><span>    set_property <span style="color:#f92672">-</span>dict <span style="color:#66d9ef">[</span>list <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.C_NUM_PROBE_IN <span style="color:#66d9ef">{</span>2<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.C_PROBE_IN1_WIDTH <span style="color:#66d9ef">{</span>8<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_cells vio_0<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I   <span style="color:#f92672">-</span>type clk   <span style="color:#f92672">-</span>freq_hz $clock_speed_hz    clk_i
+</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir O                   rst_n
+</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I                   tx_en
+</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I   <span style="color:#f92672">-</span>from <span style="color:#ae81ff">7</span> <span style="color:#f92672">-</span>to <span style="color:#ae81ff">0</span>   tx
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports clk_i<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins vio_0<span style="color:#f92672">/</span>clk<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports tx_en<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins vio_0<span style="color:#f92672">/</span>probe_in0<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports tx<span style="color:#66d9ef">]</span>    <span style="color:#66d9ef">[</span>get_bd_pins vio_0<span style="color:#f92672">/</span>probe_in1<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports rst_n<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins vio_0<span style="color:#f92672">/</span>probe_out0<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    save_bd_design
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="clockingwizardモジュール作成用のtclファイルmake_clocking_wizard_designtcl">ClockingWizardモジュール作成用のTCLファイル(make_clocking_wizard_design.tcl)</h5>
+<p>これでできるモジュールの入出力は次の通り．</p>
+
+
+    
+
+
+
+<table  class="table table-hover table-condensed">
+<thead>
+<tr>
+<th>信号名</th>
+<th>bit幅[bit]</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SYSCLK0_300_P</td>
+<td>1</td>
+<td>(入力)作動クロック信号のP</td>
+</tr>
+<tr>
+<td>SYSCLK0_300_N</td>
+<td>1</td>
+<td>(入力)作動クロック信号のN</td>
+</tr>
+<tr>
+<td>rst_n</td>
+<td>1</td>
+<td>(入力)リセット信号．不論理</td>
+</tr>
+<tr>
+<td>CLK100MHZ</td>
+<td>1</td>
+<td>(出力)ベースとなるクロック信号(100MHz)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span><span style="color:#66d9ef">proc</span> make_clkwiz_module <span style="color:#66d9ef">{</span> <span style="color:#66d9ef">{</span> clkwiz_module_name <span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span> clkwiz_ip_link <span style="color:#66d9ef">}}</span> <span style="color:#66d9ef">{</span>
+</span></span><span style="display:flex;"><span>    create_bd_design $clkwiz_module_name
+</span></span><span style="display:flex;"><span>    create_bd_cell <span style="color:#f92672">-</span>type ip <span style="color:#f92672">-</span>vlnv $clkwiz_ip_link clk_wiz_0
+</span></span><span style="display:flex;"><span>    set_property <span style="color:#f92672">-</span>dict <span style="color:#66d9ef">[</span>list CONFIG.PRIMITIVE <span style="color:#66d9ef">{</span>MMCM<span style="color:#66d9ef">}</span> CONFIG.CLK_IN1_BOARD_INTERFACE <span style="color:#66d9ef">{</span>default_300mhz_clk0<span style="color:#66d9ef">}</span> CONFIG.USE_LOCKED <span style="color:#66d9ef">{</span>false<span style="color:#66d9ef">}</span> CONFIG.USE_RESET <span style="color:#66d9ef">{</span>false<span style="color:#66d9ef">}</span> CONFIG.PRIM_SOURCE <span style="color:#66d9ef">{</span>Differential_clock_capable_pin<span style="color:#66d9ef">}</span> CONFIG.CLKIN1_JITTER_PS <span style="color:#66d9ef">{</span>33.330000000000005<span style="color:#66d9ef">}</span> CONFIG.CLKOUT1_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT2_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT3_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT4_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT5_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT6_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.CLKOUT7_DRIVES <span style="color:#66d9ef">{</span>Buffer<span style="color:#66d9ef">}</span> CONFIG.FEEDBACK_SOURCE <span style="color:#66d9ef">{</span>FDBK_AUTO<span style="color:#66d9ef">}</span> CONFIG.MMCM_BANDWIDTH <span style="color:#66d9ef">{</span>OPTIMIZED<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKFBOUT_MULT_F <span style="color:#66d9ef">{</span>4.000<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKIN1_PERIOD <span style="color:#66d9ef">{</span>3.333<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKIN2_PERIOD <span style="color:#66d9ef">{</span>10.0<span style="color:#66d9ef">}</span> CONFIG.MMCM_COMPENSATION <span style="color:#66d9ef">{</span>AUTO<span style="color:#66d9ef">}</span> CONFIG.MMCM_CLKOUT0_DIVIDE_F <span style="color:#66d9ef">{</span>12.000<span style="color:#66d9ef">}</span> CONFIG.CLKOUT1_JITTER <span style="color:#66d9ef">{</span>101.475<span style="color:#66d9ef">}</span> CONFIG.CLKOUT1_PHASE_ERROR <span style="color:#66d9ef">{</span>77.836<span style="color:#66d9ef">}]</span> <span style="color:#66d9ef">[</span>get_bd_cells clk_wiz_0<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    set_property <span style="color:#f92672">-</span>dict <span style="color:#66d9ef">[</span>list <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.CLKOUT1_JITTER <span style="color:#66d9ef">{</span>101.475<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.CLKOUT1_PHASE_ERROR <span style="color:#66d9ef">{</span>77.836<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.CLKOUT1_REQUESTED_OUT_FREQ <span style="color:#66d9ef">{</span>100<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.MMCM_CLKFBOUT_MULT_F <span style="color:#66d9ef">{</span>4.000<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.MMCM_CLKOUT0_DIVIDE_F <span style="color:#66d9ef">{</span>12.000<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>        CONFIG.MMCM_DIVCLK_DIVIDE <span style="color:#66d9ef">{</span>1<span style="color:#66d9ef">}</span> <span style="color:#960050;background-color:#1e0010">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_cells clk_wiz_0<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -----入力部分の接続--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    create_bd_port <span style="color:#f92672">-</span>dir I SYSCLK0_300_N
+</span></span><span style="display:flex;"><span>    create_bd_port <span style="color:#f92672">-</span>dir I SYSCLK0_300_P
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports SYSCLK0_300_N<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_in1_n<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports SYSCLK0_300_P<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_in1_p<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -----出力部分の接続--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    create_bd_port <span style="color:#f92672">-</span>dir O CLK100MHZ
+</span></span><span style="display:flex;"><span>    connect_bd_net <span style="color:#66d9ef">[</span>get_bd_ports CLK100MHZ<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">[</span>get_bd_pins clk_wiz_0<span style="color:#f92672">/</span>clk_out1<span style="color:#66d9ef">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -----保存--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    save_bd_design
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</br>
+<h4 id="fpga上のvio出力を表示させるtclファイル">FPGA上のVIO(出力)を表示させるTCLファイル</h4>
+<h5 id="やりたいこと">やりたいこと</h5>
+<p>作成したbitstreamファイルをFPGAに書き込んだのち，行いたいのは以下の2つ</p>
+<ul>
+<li>最初にrst_nを1→0→1とリセットをかけたい</li>
+<li>ターミナルやファイルにtx_dataを表示したい</li>
+</ul>
+<h5 id="実際のコードshow_viotcl">実際のコードshow_vio.tcl</h5>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> projectPath <span style="color:#66d9ef">[</span>file normalize <span style="color:#66d9ef">[</span>file dirname <span style="color:#66d9ef">[</span>file dirname <span style="color:#66d9ef">[</span>info script<span style="color:#66d9ef">]]]]</span>
+</span></span><span style="display:flex;"><span>cd $projectPath
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># defineファイル追加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>source <span style="color:#e6db74">&#34;$projectPath/tcl/define.tcl&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 保存先ファイルの初期化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">set</span>     log <span style="color:#66d9ef">[</span>open $logfile w<span style="color:#66d9ef">]</span>   <span style="color:#66d9ef">;</span><span style="color:#75715e">#① 保存先ファイルをopen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>puts    <span style="color:#f92672">-</span>nonewline  $log <span style="color:#e6db74">&#34;&#34;</span>     <span style="color:#66d9ef">;</span><span style="color:#75715e">#② 中身を削除
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>close   $log                    <span style="color:#66d9ef">;</span><span style="color:#75715e">#③ 保存先ファイルをclose
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># ボーレートの設定
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># $delay_time[ms]ごとに計測
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set_property CORE_REFRESH_RATE_MS <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># リセット信号(vio_0_probe_out0)の出力
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   1→0→1 となる
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1を出力
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set_property OUTPUT_VALUE <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">[</span>get_hw_probes vio<span style="color:#f92672">/</span>vio_0_probe_out0 <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span>commit_hw_vio <span style="color:#66d9ef">[</span>get_hw_probes <span style="color:#66d9ef">{</span>vio<span style="color:#f92672">/</span>vio_0_probe_out0<span style="color:#66d9ef">}</span> <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">after</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 0を出力
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set_property OUTPUT_VALUE <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">[</span>get_hw_probes vio<span style="color:#f92672">/</span>vio_0_probe_out0 <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span>commit_hw_vio <span style="color:#66d9ef">[</span>get_hw_probes <span style="color:#66d9ef">{</span>vio<span style="color:#f92672">/</span>vio_0_probe_out0<span style="color:#66d9ef">}</span> <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">after</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1を出力
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set_property OUTPUT_VALUE <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">[</span>get_hw_probes vio<span style="color:#f92672">/</span>vio_0_probe_out0 <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span>commit_hw_vio <span style="color:#66d9ef">[</span>get_hw_probes <span style="color:#66d9ef">{</span>vio<span style="color:#f92672">/</span>vio_0_probe_out0<span style="color:#66d9ef">}</span> <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_vios <span style="color:#f92672">-</span>of_objects <span style="color:#66d9ef">[</span>get_hw_devices $hw_device_name<span style="color:#66d9ef">]</span> <span style="color:#f92672">-</span>filter <span style="color:#66d9ef">{</span>CELL_NAME<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#f92672">~</span><span style="color:#e6db74">&#34;vio/vio_0&#34;</span><span style="color:#66d9ef">}]]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 中断するまで表示を繰り返す
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   Canselを押して中断
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#############################################
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">{</span>1<span style="color:#66d9ef">}</span> <span style="color:#66d9ef">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">set</span> tx_value_num    <span style="color:#66d9ef">[</span>get_property   INPUT_VALUE <span style="color:#66d9ef">[</span>get_hw_probes vio<span style="color:#f92672">/</span>tx_1<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">]</span>      <span style="color:#66d9ef">;</span><span style="color:#75715e">#RTLから受け取った表示したい文字データ(数値)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">set</span> tx_value        <span style="color:#66d9ef">[</span>format         <span style="color:#f92672">%</span>c          $tx_value_num<span style="color:#66d9ef">]</span>                  <span style="color:#66d9ef">;</span><span style="color:#75715e">#数値を文字に変換
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">set</span> tx_en_value     <span style="color:#66d9ef">[</span>get_property   INPUT_VALUE <span style="color:#66d9ef">[</span>get_hw_probes vio<span style="color:#f92672">/</span>tx_en_1<span style="color:#66d9ef">]</span> <span style="color:#66d9ef">]</span>   <span style="color:#66d9ef">;</span><span style="color:#75715e">#RTLから受け取った表示したい文字データのenable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">{</span>$tx_en_value <span style="color:#f92672">==</span> 1<span style="color:#66d9ef">}</span> <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">{</span>      <span style="color:#960050;background-color:#1e0010">;</span><span style="color:#75715e"># 表示したい文字があれば
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        puts <span style="color:#f92672">-</span>nonewline $tx_value       <span style="color:#66d9ef">;</span><span style="color:#75715e"># TCLコンソールに表示
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">set</span> log <span style="color:#66d9ef">[</span>open $logfile a<span style="color:#66d9ef">]</span>       <span style="color:#66d9ef">;</span><span style="color:#75715e"># 保存先ファイルをopen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        puts <span style="color:#f92672">-</span>nonewline $log $tx_value  <span style="color:#66d9ef">;</span><span style="color:#75715e"># 保存先ファイルに出力
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        close $log                      <span style="color:#66d9ef">;</span><span style="color:#75715e"># 保存先ファイルをclose
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">after</span> <span style="color:#ae81ff">100</span>   <span style="color:#66d9ef">;</span><span style="color:#75715e"># 100[ms]停止
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h4 id="結果">結果</h4>
+<h5 id="bitstream生成">〜bitstream生成</h5>
+<p>ターミナルで実行しましょ．
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span>vivado <span style="color:#f92672">-</span>mode batch <span style="color:#f92672">-</span>source tcl<span style="color:#f92672">/</span>build.tcl</span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<p>実行後lsすると<code>output</code>ってディレクトリができますわよ．</p>
+<h5 id="vivadoを立ち上げて書き込み">vivadoを立ち上げて書き込み</h5>
+<p><code>Open Hardware Manager</code>から<code>Open Target</code>の<code>Auto Connect</code>して，<code>Program Device</code>で書き込み．</p>
+<h5 id="書き込んだfpgaと通信">書き込んだFPGAと通信</h5>
+<p>Vivadoのtclコンソールで実行しましょ．
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span>source tcl<span style="color:#f92672">/</span>show_vio.tcl</span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<p>その結果．Vivadoはこんな画面になる．
+下の方に<code>BDFHJLNPRT</code>と表示されてればOK
+<code>Cansel</code>を押せば停止できますわ．
+<img src="/images/contents/2023/AlveoU250/how2debug/result_vivado.png" alt=""></p>
+<p><code>output/vio.log</code>の中身はこんな感じになる．
+<img src="/images/contents/2023/AlveoU250/how2debug/result_violog.png" alt=""></p>
+<hr>
+<h4 id="まとめ">まとめ</h4>
+<p>AlveoU250でシリアル通信ができなかった．しかしまあVirtual I/Oを使って10Hzの速度で出力を文字列で確認できるようにした．</p>
+<p>今後このモジュールを使わなくて済むことを祈っている．</p>
+
+          </article>
+      </div>
+      <div class="col-lg-4">
+  <div class="widget search-box">
+    <form action="https://gitefu.com//search">
+      <i class="ti-search"></i>
+      <input class="form-control border-0 pl-5" type="search" placeholder="Search" id="search-query" name="s">
+    </form>
+  </div>
+  <div class="widget">
+    <h6 class="mb-4">LATEST POST</h6>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://gitefu.com/blog/2023/c103/notice/"><img class="mr-3 post-thumb-sm" src="https://gitefu.com/images/contents/2023/C103/oshinagaki.jpg"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Dec 30, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="https://gitefu.com/blog/2023/c103/notice/">C103で技術本を配布します</a></h6>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://gitefu.com/blog/2023/makerfairetokyo/notice/"><img class="mr-3 post-thumb-sm" src="https://gitefu.com/images/contents/2022/MFT/machine_and_letter.webp"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Aug 21, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="https://gitefu.com/blog/2023/makerfairetokyo/notice/">MakerFaireTokyo 2023に出展します！</a></h6>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://gitefu.com/blog/2023/c102/notice/"><img class="mr-3 post-thumb-sm" src="https://gitefu.com/images/contents/2023/C102/oshinagaki.jpg"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Aug 14, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="https://gitefu.com/blog/2023/c102/notice/">C102で技術本を配布します</a></h6>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h6 class="mb-4">TAG</h6>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/tags/alveo/">Alveo</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/comic-market/">Comic market</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/fpga/">Fpga</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/maker-faire-tokyo/">Maker faire tokyo</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/tofunology/">Tofunology</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/vivado/">Vivado</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/%e6%a3%ae%e3%81%ae%e5%85%84%e8%b2%b4%e3%81%9f%e3%81%a1/">森の兄貴たち</a></li>
+    </ul>
+  </div>
+  <div class="widget">
+    <h6 class="mb-4">CATEGORIES</h6>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/fpga/">Fpga</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/others/">Others</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/%e3%82%82%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a/">ものつくり</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/%e6%8a%80%e8%a1%93%e6%9c%ac%e3%81%a4%e3%81%8f%e3%82%8a/">技術本つくり</a></li>
+    </ul>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://gitefu.com/"><img src="https://gitefu.com/images/gitefu_logo.png" alt="Gitefu | Personal Site" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Follow</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://twitter.com/tnk_make" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://github.com/Gitefu" class="text-dark"><i class="ti-github"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0"></p>
+  </div>
+</footer>
+
+
+<!-- JS Plugins -->
+
+<script src="https://gitefu.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://gitefu.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://gitefu.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://gitefu.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://gitefu.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://gitefu.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://gitefu.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://gitefu.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://gitefu.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://gitefu.com/plugins/search/mark.js"></script>
+
+<script src="https://gitefu.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://gitefu.com/js/script.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tops on Gitefu | Personal Site</title>
+    <link>https://gitefu.com/tops/</link>
+    <description>Recent content in Tops on Gitefu | Personal Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <atom:link href="https://gitefu.com/tops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ものつくり - Fabrication</title>
+      <link>https://gitefu.com/top/fabrication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://gitefu.com/top/fabrication/</guid>
+      <description>tofunology tofunologyは私の出身工業高校の卒業生で結成した完全趣味のモノづくりサークルです。 モノづくりの楽しさを求めて再結集したこともあり，</description>
+    </item>
+    <item>
+      <title>技術本 - Tech. Books</title>
+      <link>https://gitefu.com/top/techbook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://gitefu.com/top/techbook/</guid>
+      <description>&amp;ldquo;森の兄貴たち&amp;rdquo; で 活動中 「森の兄貴たち」は3人のメンバーで構成された技術系の同人サークルです． 同人誌の即売会等で2次</description>
+    </item>
+    <item>
+      <title>研究活動 - Studies</title>
+      <link>https://gitefu.com/top/study/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://gitefu.com/top/study/</guid>
+      <description>Tomoaki Tanaka, Ryosuke Higashi, Hidetaro Tanaka, Takefumi Miyoshi, Yasunori Osana, Jubee Tada, Kiyofumi Tanaka, Hironori Nakajo, &amp;ldquo;Shared Vector Register of RISC-V for the Future Hardware Acceleration&amp;rdquo;, Sixth Workshop on Computer Architecture Research with RISC-V (CARRV 2022), 19th June, 2022, N.Y., co-located with ISCA 2022 田中友章, 東良輔, 田中清史, 長名保範, 三好健文, 多田</description>
+    </item>
+  </channel>
+</rss>

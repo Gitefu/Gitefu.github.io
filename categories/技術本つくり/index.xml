@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技術本つくり on Gitefu | Personal Site</title>
+    <link>https://gitefu.com/categories/%E6%8A%80%E8%A1%93%E6%9C%AC%E3%81%A4%E3%81%8F%E3%82%8A/</link>
+    <description>Recent content in 技術本つくり on Gitefu | Personal Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Sat, 30 Dec 2023 14:46:10 +0600</lastBuildDate>
+    <atom:link href="https://gitefu.com/categories/%E6%8A%80%E8%A1%93%E6%9C%AC%E3%81%A4%E3%81%8F%E3%82%8A/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C103で技術本を配布します</title>
+      <link>https://gitefu.com/blog/2023/c103/notice/</link>
+      <pubDate>Sat, 30 Dec 2023 14:46:10 +0600</pubDate>
+      <guid>https://gitefu.com/blog/2023/c103/notice/</guid>
+      <description>C103 二日目 東U19bにて，「佐々木千枝とFusion360する本」を頒布いたします！ 詳しくはこちら</description>
+    </item>
+    <item>
+      <title>C102で技術本を配布します</title>
+      <link>https://gitefu.com/blog/2023/c102/notice/</link>
+      <pubDate>Mon, 14 Aug 2023 14:46:10 +0600</pubDate>
+      <guid>https://gitefu.com/blog/2023/c102/notice/</guid>
+      <description>C102 二日目 西か02bにて，「佐久間まゆとはじめる無線マイコン|ESP-WROOM-32」を頒布いたします！ 詳しくはこちら</description>
+    </item>
+    <item>
+      <title>C101で技術本を配布します</title>
+      <link>https://gitefu.com/blog/2022/c101/notice/</link>
+      <pubDate>Wed, 21 Dec 2022 14:46:10 +0600</pubDate>
+      <guid>https://gitefu.com/blog/2022/c101/notice/</guid>
+      <description>C101のサークルに無事当選しました！ アイドルマスター シャイニーカラーズのキャラの1人「園田智代子」 と一緒にフィルタ処理を学ぶ本を頒布します</description>
+    </item>
+    <item>
+      <title>C100で技術本を配布します</title>
+      <link>https://gitefu.com/blog/2022/c100/notice/</link>
+      <pubDate>Sat, 13 Aug 2022 14:46:10 +0600</pubDate>
+      <guid>https://gitefu.com/blog/2022/c100/notice/</guid>
+      <description>C100のサークルに無事当選しました！ アイドルマスター シンデレラガールズのキャラの1人「佐久間まゆ」 と一緒にR言語を使ったデータ解析を行う本</description>
+    </item>
+  </channel>
+</rss>
