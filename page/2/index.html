@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ja-jp"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <title>Gitefu | Personal Site</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="This site shows Gitefu&#39;s works !">
+  <meta name="author" content="Gitefu">
+  <meta name="generator" content="Hugo 0.147.3">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="http://localhost:1313/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="http://localhost:1313/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="http://localhost:1313/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/style.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="http://localhost:1313/images/gitefu_favicon.png " type="image/x-icon">
+  <link rel="icon" href="http://localhost:1313/images/gitefu_favicon.png " type="image/x-icon">
+  <link rel="apple-touch-icon" href="http://localhost:1313/images/gitefu_favicon.png " type="image/x-icon" sizes="180x180">
+  
+  
+  <meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="Gitefu | Personal Site">
+  <meta property="og:title" content="Gitefu | Personal Site">
+  <meta property="og:description" content="This site shows Gitefu&#39;s works !">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="website">
+
+
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="http://localhost:1313/"><img class="img-fluid" src="http://localhost:1313/images/gitefu_logo.png" alt="Gitefu | Personal Site"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="http://localhost:1313/about/">About</a>
+        </li>
+        
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Activities
+          </a>
+          <div class="dropdown-menu" >
+            
+            <a class="dropdown-item" href="http://localhost:1313/top/study/">研究-Study</a>
+            
+            <a class="dropdown-item" href="http://localhost:1313/top/fabrication/">ものつくり-Fabrication</a>
+            
+            <a class="dropdown-item" href="http://localhost:1313/top/techbook/">技術本つくり-Tech.Book</a>
+            
+          </div>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="http://localhost:1313/tags/">Tags</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="http://localhost:1313//search/">
+        <input class="form-control px-0 w-100" type="search" placeholder="Search" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 mb-12">
+        <article class="text-center">
+          <h2>Blog</h2>
+        </article>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-10 mb-30">
+        <article class="text-center">
+          日々の色々を書いています．
+        </article>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row masonry-container">
+      
+        
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <article class="text-center">
+            <div class="top_card_parent">
+              <a href="http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post1/">
+                <img class="img-fluid mb-4 top_card" src="http://localhost:1313/images/contents/2023/AlveoU250/XPM_MEMORY_SPRAM/thumb.jpg" alt="post-thumb">
+              </a>
+            </div>
+            <p class="text-uppercase mb-2">ものつくり</p>
+            <h4 class="title-border"><a class="text-dark" href="http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post1/">Alveo U250でXPM_MEMORY_SPRAMを使いたい(1)</a></h4>
+            <p><h4 id="alveo-u250でxpm_memory_spramを使いたい">Alveo U250でXPM_MEMORY_SPRAMを使いたい</h4>
+<p>ちょっとAlveo U250でRAMを指定のファイルで初期化することにした．
+Alveo U250はultrascale+をベースに云々ってサイトに書いてあるので，<code>XPM_MEMORY_SPRAM</code>が使えそう．
+ECC周りは不要なので，まあ無視します．
+それ以外の部分ちょこちょこ使ってみましょう．</p></p>
+            <a href="http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post1/" class="btn btn-transparent">read more</a>
+          </article>
+        </div>
+        
+      
+        
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <article class="text-center">
+            <div class="top_card_parent">
+              <a href="http://localhost:1313/blog/2023/vivado/aboutmaxthreads/post/">
+                <img class="img-fluid mb-4 top_card" src="http://localhost:1313/images/contents/2023/Vivado/aboutMaxthreads/thumb.jpg" alt="post-thumb">
+              </a>
+            </div>
+            <p class="text-uppercase mb-2">ものつくり</p>
+            <h4 class="title-border"><a class="text-dark" href="http://localhost:1313/blog/2023/vivado/aboutmaxthreads/post/">Vivadoツールでのマルチスレッドの話</a></h4>
+            <p><h4 id="内容について">内容について</h4>
+<p><strong>2023.03.24時点の内容です．</strong></p>
+<p>公式ドキュメントに書いてあったので，メモしただけ．</p>
+<p><a href="https://docs.xilinx.com/r/ja-JP/ug904-vivado-implementation/Vivado-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89" target="_blank" rel="noopener">Vivado Design Suite ユーザー ガイド: インプリメンテーション (UG904):Vivado ツールでのマルチスレッド</a></p></p>
+            <a href="http://localhost:1313/blog/2023/vivado/aboutmaxthreads/post/" class="btn btn-transparent">read more</a>
+          </article>
+        </div>
+        
+      
+        
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <article class="text-center">
+            <div class="top_card_parent">
+              <a href="http://localhost:1313/blog/2023/alveou250/how2debug/post1/">
+                <img class="img-fluid mb-4 top_card" src="http://localhost:1313/images/contents/2023/AlveoU250/how2debug/design_draft.jpg" alt="post-thumb">
+              </a>
+            </div>
+            <p class="text-uppercase mb-2">ものつくり</p>
+            <h4 class="title-border"><a class="text-dark" href="http://localhost:1313/blog/2023/alveou250/how2debug/post1/">Alveo U250からホストに文字列転送する話</a></h4>
+            <p><h4 id="virtual-ioをuartの代わりに">Virtual I/OをUARTの代わりに</h4>
+<h5 id="なんかalveou250でuartが使えない">なんかAlveoU250でUARTが使えない</h5>
+<p>うーん．なぜか<a href="https://japan.xilinx.com/products/boards-and-kits/alveo/u250.html" target="_blank" rel="noopener">Alveo U250</a>でUARTが使えない．</p>
+<p>ただ文字を表示したいだけだし，UARTモジュールを実装してみたんだけど，動かなかった．
+なんでや！と思ってXDCファイルを更新したり，ドライバ再インスコしたり，再起動したり，色々したんだけど．．．
+困るのよねえ．何かtipsあれば<a href="https://twitter.com/tnk_make" target="_blank" rel="noopener">Twitter(@tnk_make)</a>で教えてください．．．</p></p>
+            <a href="http://localhost:1313/blog/2023/alveou250/how2debug/post1/" class="btn btn-transparent">read more</a>
+          </article>
+        </div>
+        
+      
+        
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <article class="text-center">
+            <div class="top_card_parent">
+              <a href="http://localhost:1313/blog/2022/c101/notice/">
+                <img class="img-fluid mb-4 top_card" src="http://localhost:1313/images/contents/2022/C101/oshinagaki.jpg" alt="post-thumb">
+              </a>
+            </div>
+            <p class="text-uppercase mb-2">技術本つくり</p>
+            <h4 class="title-border"><a class="text-dark" href="http://localhost:1313/blog/2022/c101/notice/">C101で技術本を配布します</a></h4>
+            <p><p><img src="../images/post-img.jpg" alt="">
+　C101のサークルに無事当選しました！
+アイドルマスター シャイニーカラーズのキャラの1人「<a href="https://shinycolors.idolmaster.jp/idol/hokagoclimaxgirls/chiyoko.html" target="_blank" rel="noopener">園田智代子</a>」
+と一緒にフィルタ処理を学ぶ本を頒布します．</p>
+<p>　まずサークルについて
+<a href="https://mori-no-anikitachi.github.io/" target="_blank" rel="noopener">森の兄貴たち</a> は，<code>ぎてふ(私)</code>，<code>さ〜もんぱん</code>, <code>こじ</code>の3人で構成されています．私はスケジュール系の管理や全体の構成サポートを担当しました．メイン著者は<code>こじ</code>さんです．次回は多分私がメインかなあ．</p></p>
+            <a href="http://localhost:1313/blog/2022/c101/notice/" class="btn btn-transparent">read more</a>
+          </article>
+        </div>
+        
+      
+        
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <article class="text-center">
+            <div class="top_card_parent">
+              <a href="http://localhost:1313/blog/2022/mft/notice/">
+                <img class="img-fluid mb-4 top_card" src="http://localhost:1313/images/contents/2022/MFT/machine_and_letter.webp" alt="post-thumb">
+              </a>
+            </div>
+            <p class="text-uppercase mb-2">ものつくり</p>
+            <h4 class="title-border"><a class="text-dark" href="http://localhost:1313/blog/2022/mft/notice/">Maker Faire Tokyo 2022 に出展します</a></h4>
+            <p><p>　私の所属するモノつくり団体<code>tofunology</code>は<a href="https://makezine.jp/event/mft2022/" target="_blank" rel="noopener">Maker Faire Tokyo 2022</a>に出展します！
+MakerFaireTokyo2022は毎年ビッグサイトで開催される国内最大級のモノつくりイベントです．
+2019年度から毎年出展し続けており，今年で4年目です．</p></p>
+            <a href="http://localhost:1313/blog/2022/mft/notice/" class="btn btn-transparent">read more</a>
+          </article>
+        </div>
+        
+      
+        
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <article class="text-center">
+            <div class="top_card_parent">
+              <a href="http://localhost:1313/blog/2022/c100/notice/">
+                <img class="img-fluid mb-4 top_card" src="http://localhost:1313/images/contents/2022/C100/oshinagaki.jpg" alt="post-thumb">
+              </a>
+            </div>
+            <p class="text-uppercase mb-2">技術本つくり</p>
+            <h4 class="title-border"><a class="text-dark" href="http://localhost:1313/blog/2022/c100/notice/">C100で技術本を配布します</a></h4>
+            <p><p><img src="../images/post-img.jpg" alt="">
+　C100のサークルに無事当選しました！
+アイドルマスター シンデレラガールズのキャラの1人「<a href="https://dic.nicovideo.jp/id/4919709" target="_blank" rel="noopener">佐久間まゆ</a>」
+と一緒にR言語を使ったデータ解析を行う本を頒布します．</p></p>
+            <a href="http://localhost:1313/blog/2022/c100/notice/" class="btn btn-transparent">read more</a>
+          </article>
+        </div>
+        
+      
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-12">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center align-items-center">
+            
+            
+            <li class="page-item">
+              <a href="/" class="page-link">
+                &laquo; Previous
+              </a>
+            </li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="page-item">
+              <a href="/" class="page-link">
+                1
+              </a>
+            </li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="page-item page-item active ">
+              <a href="/page/2/" class="page-link">
+                2
+              </a>
+            </li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="page-item">
+              <a href="/page/3/" class="page-link">
+                3
+              </a>
+            </li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="page-item">
+              <a href="/page/4/" class="page-link">
+                4
+              </a>
+            </li>
+            
+            
+            
+            
+            <li class="page-item">
+              <a href="/page/3/" class="page-link">
+                Next &raquo;
+              </a>
+            </li>
+            
+          </ul>
+        </nav>
+        
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="http://localhost:1313/"><img src="http://localhost:1313/images/gitefu_logo.png" alt="Gitefu | Personal Site" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Follow</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://twitter.com/tnk_make" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://github.com/Gitefu" class="text-dark"><i class="ti-github"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0"></p>
+  </div>
+</footer>
+
+
+<!-- JS Plugins -->
+
+<script src="http://localhost:1313/plugins/jQuery/jquery.min.js"></script>
+
+<script src="http://localhost:1313/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="http://localhost:1313/plugins/slick/slick.min.js"></script>
+
+<script src="http://localhost:1313/plugins/headroom/headroom.js"></script>
+
+<script src="http://localhost:1313/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="http://localhost:1313/plugins/masonry/masonry.js"></script>
+
+<script src="http://localhost:1313/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="http://localhost:1313/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="http://localhost:1313/plugins/search/fuse.min.js"></script>
+
+<script src="http://localhost:1313/plugins/search/mark.js"></script>
+
+<script src="http://localhost:1313/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="http://localhost:1313/js/script.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja-jp"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <title>Vivadoツールでのマルチスレッドの話</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AlveoU250でUARTを使いたいのに使えない．．．">
+  <meta name="author" content="Gitefu">
+  <meta name="generator" content="Hugo 0.147.3">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="http://localhost:1313/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="http://localhost:1313/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="http://localhost:1313/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/style.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="http://localhost:1313/images/gitefu_favicon.png " type="image/x-icon">
+  <link rel="icon" href="http://localhost:1313/images/gitefu_favicon.png " type="image/x-icon">
+  <link rel="apple-touch-icon" href="http://localhost:1313/images/gitefu_favicon.png " type="image/x-icon" sizes="180x180">
+  
+  
+  <meta property="og:image" content="http://localhost:1313/images/contents/2023/Vivado/aboutMaxthreads/thumb.jpg" />
+  
+  <meta property="og:url" content="http://localhost:1313/blog/2023/vivado/aboutmaxthreads/post/">
+  <meta property="og:site_name" content="Gitefu | Personal Site">
+  <meta property="og:title" content="Vivadoツールでのマルチスレッドの話">
+  <meta property="og:description" content="AlveoU250でUARTを使いたいのに使えない．．．">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2023-03-24T14:46:10+06:00">
+    <meta property="article:modified_time" content="2023-03-24T14:46:10+06:00">
+    <meta property="article:tag" content="FPGA">
+    <meta property="article:tag" content="Vivado">
+
+
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="http://localhost:1313/"><img class="img-fluid" src="http://localhost:1313/images/gitefu_logo.png" alt="Gitefu | Personal Site"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="http://localhost:1313/about/">About</a>
+        </li>
+        
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Activities
+          </a>
+          <div class="dropdown-menu" >
+            
+            <a class="dropdown-item" href="http://localhost:1313/top/study/">研究-Study</a>
+            
+            <a class="dropdown-item" href="http://localhost:1313/top/fabrication/">ものつくり-Fabrication</a>
+            
+            <a class="dropdown-item" href="http://localhost:1313/top/techbook/">技術本つくり-Tech.Book</a>
+            
+          </div>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="http://localhost:1313/tags/">Tags</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="http://localhost:1313//search/">
+        <input class="form-control px-0 w-100" type="search" placeholder="Search" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+
+
+<section class="section bg-secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h4>Vivadoツールでのマルチスレッドの話</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          
+          <li class="list-inline-item"><i class="ti-calendar mr-2"></i>Mar 24, 2023</li>
+        </ul>
+          <article class="content">
+            <img src="http://localhost:1313/images/contents/2023/Vivado/aboutMaxthreads/thumb.jpg" alt="post-thumb" class="img-fluid rounded mr-5 mb-4">
+            
+              <div class="TableOfContents">
+                <h4>目次</h4>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#内容について">内容について</a></li>
+    <li><a href="#書いてあった内容">書いてあった内容</a></li>
+    <li><a href="#まとめ">まとめ</a></li>
+  </ul>
+</nav>
+              </div>
+            
+            <h4 id="内容について">内容について</h4>
+<p><strong>2023.03.24時点の内容です．</strong></p>
+<p>公式ドキュメントに書いてあったので，メモしただけ．</p>
+<p><a href="https://docs.xilinx.com/r/ja-JP/ug904-vivado-implementation/Vivado-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89" target="_blank" rel="noopener">Vivado Design Suite ユーザー ガイド: インプリメンテーション (UG904):Vivado ツールでのマルチスレッド</a></p>
+<p>このサイトを以下では<code>公式ドキュメント</code>と呼称しますわね．</p>
+<h4 id="書いてあった内容">書いてあった内容</h4>
+<h5 id="最大8スレッド">最大8スレッド</h5>
+<p>公式ドキュメントから引用するとこんな感じ．</p>
+<blockquote>
+<p>マルチプロセッサ システムでは、Vivado ツールで DRC レポート、スタティック タイミング解析、配置、配線などのプロセスを高速化するためマルチスレッドが使用されます。同時に使用される最大スレッド数は、プロセッサの数、タスクによって異なります。タスクによって使用される最大スレッド数は、次のとおりです。</p>
+<ul>
+<li>DRC レポート: 8</li>
+<li>スタティック タイミング解析: 8</li>
+<li>配置: 8</li>
+<li>配線: 8</li>
+<li>物理最適化: 8</li>
+</ul></blockquote>
+<p>つまり，<code>10コア20スレッド</code>のプロセッサ使っても<code>8</code>が限界ってことかあ．</p>
+<p>ちなみに
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tcl" data-lang="tcl"><span style="display:flex;"><span>set_param general.maxThreads <span style="color:#ae81ff">8</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+最大値を決められる．これやらないと怒られる時なんてそうそうないけどね．</p>
+<h5 id="windowsは2スレッドが限界">Windowsは2スレッドが限界</h5>
+<p>公式ドキュメントには以下のように書いてある．</p>
+<blockquote>
+<p>同時に実行可能なスレッドのデフォルト最大数は、OS によって異なります。Windows システムでは 2 で、Linux システムではデフォルトは 8 です。</p></blockquote>
+<p>マジ？？？という気持ち．
+うーん，FPGAの開発環境を整えるときはLinuxがいいわね．
+<del>てかmacOSの対応してほしい</del></p>
+<p>だけど，重要なのは公式ドキュメントの以下の文．</p>
+<blockquote>
+<p>同時に使用可能なスレッド数は、次の最小の値になります。</p>
+<ul>
+<li>プロセッサの最大数</li>
+<li>タスクの制限スレッド数</li>
+<li>一般制限スレッド数</li>
+</ul></blockquote>
+<p>ということは，windows環境で<code>general.maxThreads</code>を<code>8</code>にしても，使われるスレッドは2つってことだね．</p>
+<h4 id="まとめ">まとめ</h4>
+<p>とりあえず<code>8スレッド</code>って宣言しときゃあ，勝手に最大値に設定してくれるってことだな！ヨシ！</p>
+<p>以上．</p>
+
+          </article>
+      </div>
+      <div class="col-lg-4">
+  <div class="widget search-box">
+    <form action="http://localhost:1313//search">
+      <i class="ti-search"></i>
+      <input class="form-control border-0 pl-5" type="search" placeholder="Search" id="search-query" name="s">
+    </form>
+  </div>
+  <div class="widget">
+    <h6 class="mb-4">LATEST POST</h6>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="http://localhost:1313/blog/2023/c103/notice/"><img class="mr-3 post-thumb-sm" src="http://localhost:1313/images/contents/2023/C103/oshinagaki.jpg"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Dec 30, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="http://localhost:1313/blog/2023/c103/notice/">C103で技術本を配布します</a></h6>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="http://localhost:1313/blog/2023/makerfairetokyo/notice/"><img class="mr-3 post-thumb-sm" src="http://localhost:1313/images/contents/2022/MFT/machine_and_letter.webp"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Aug 21, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="http://localhost:1313/blog/2023/makerfairetokyo/notice/">MakerFaireTokyo 2023に出展します！</a></h6>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="http://localhost:1313/blog/2023/c102/notice/"><img class="mr-3 post-thumb-sm" src="http://localhost:1313/images/contents/2023/C102/oshinagaki.jpg"></a>
+      </div>
+      <div class="media-body">
+        <ul class="list-inline d-flex justify-content-between mb-2">
+          
+          <li class="list-inline-item">Aug 14, 2023</li>
+        </ul>
+        <h6><a class="text-dark" href="http://localhost:1313/blog/2023/c102/notice/">C102で技術本を配布します</a></h6>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h6 class="mb-4">TAG</h6>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/tags/alveo/">Alveo</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/comic-market/">Comic market</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/fpga/">Fpga</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/maker-faire-tokyo/">Maker faire tokyo</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/tofunology/">Tofunology</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/vivado/">Vivado</a></li>
+      <li class="list-inline-item m-1"><a href="/tags/%e6%a3%ae%e3%81%ae%e5%85%84%e8%b2%b4%e3%81%9f%e3%81%a1/">森の兄貴たち</a></li>
+    </ul>
+  </div>
+  <div class="widget">
+    <h6 class="mb-4">CATEGORIES</h6>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/fpga/">Fpga</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/others/">Others</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/%e3%82%82%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a/">ものつくり</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/%e6%8a%80%e8%a1%93%e6%9c%ac%e3%81%a4%e3%81%8f%e3%82%8a/">技術本つくり</a></li>
+    </ul>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="http://localhost:1313/"><img src="http://localhost:1313/images/gitefu_logo.png" alt="Gitefu | Personal Site" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Follow</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://twitter.com/tnk_make" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://github.com/Gitefu" class="text-dark"><i class="ti-github"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0"></p>
+  </div>
+</footer>
+
+
+<!-- JS Plugins -->
+
+<script src="http://localhost:1313/plugins/jQuery/jquery.min.js"></script>
+
+<script src="http://localhost:1313/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="http://localhost:1313/plugins/slick/slick.min.js"></script>
+
+<script src="http://localhost:1313/plugins/headroom/headroom.js"></script>
+
+<script src="http://localhost:1313/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="http://localhost:1313/plugins/masonry/masonry.js"></script>
+
+<script src="http://localhost:1313/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="http://localhost:1313/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="http://localhost:1313/plugins/search/fuse.min.js"></script>
+
+<script src="http://localhost:1313/plugins/search/mark.js"></script>
+
+<script src="http://localhost:1313/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="http://localhost:1313/js/script.min.js"></script>
+
+
+
+
+</body>
+</html>

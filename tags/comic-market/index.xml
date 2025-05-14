@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Comic Market on Gitefu | Personal Site</title>
+    <link>http://localhost:1313/tags/comic-market/</link>
+    <description>Recent content in Comic Market on Gitefu | Personal Site</description>
+    <generator>Hugo</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Sat, 30 Dec 2023 14:46:10 +0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/comic-market/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C103で技術本を配布します</title>
+      <link>http://localhost:1313/blog/2023/c103/notice/</link>
+      <pubDate>Sat, 30 Dec 2023 14:46:10 +0600</pubDate>
+      <guid>http://localhost:1313/blog/2023/c103/notice/</guid>
+      <description>&lt;p&gt;&lt;code&gt;C103 二日目 東U19b&lt;/code&gt;にて，「佐々木千枝とFusion360する本」を頒布いたします！&lt;/p&gt;&#xA;&lt;p&gt;詳しくは&lt;a href=&#34;https://mori-no-anikitachi.github.io/c103/main/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;こちら&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>C102で技術本を配布します</title>
+      <link>http://localhost:1313/blog/2023/c102/notice/</link>
+      <pubDate>Mon, 14 Aug 2023 14:46:10 +0600</pubDate>
+      <guid>http://localhost:1313/blog/2023/c102/notice/</guid>
+      <description>&lt;p&gt;&lt;code&gt;C102 二日目 西か02b&lt;/code&gt;にて，「佐久間まゆとはじめる無線マイコン|ESP-WROOM-32」を頒布いたします！&lt;/p&gt;&#xA;&lt;p&gt;詳しくは&lt;a href=&#34;https://mori-no-anikitachi.github.io/c102/main/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;こちら&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>C101で技術本を配布します</title>
+      <link>http://localhost:1313/blog/2022/c101/notice/</link>
+      <pubDate>Wed, 21 Dec 2022 14:46:10 +0600</pubDate>
+      <guid>http://localhost:1313/blog/2022/c101/notice/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;../images/post-img.jpg&#34; alt=&#34;&#34;&gt;&#xA;　C101のサークルに無事当選しました！&#xA;アイドルマスター シャイニーカラーズのキャラの1人「&lt;a href=&#34;https://shinycolors.idolmaster.jp/idol/hokagoclimaxgirls/chiyoko.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;園田智代子&lt;/a&gt;」&#xA;と一緒にフィルタ処理を学ぶ本を頒布します．&lt;/p&gt;&#xA;&lt;p&gt;　まずサークルについて&#xA;&lt;a href=&#34;https://mori-no-anikitachi.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;森の兄貴たち&lt;/a&gt; は，&lt;code&gt;ぎてふ(私)&lt;/code&gt;，&lt;code&gt;さ〜もんぱん&lt;/code&gt;, &lt;code&gt;こじ&lt;/code&gt;の3人で構成されています．私はスケジュール系の管理や全体の構成サポートを担当しました．メイン著者は&lt;code&gt;こじ&lt;/code&gt;さんです．次回は多分私がメインかなあ．&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>C100で技術本を配布します</title>
+      <link>http://localhost:1313/blog/2022/c100/notice/</link>
+      <pubDate>Sat, 13 Aug 2022 14:46:10 +0600</pubDate>
+      <guid>http://localhost:1313/blog/2022/c100/notice/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;../images/post-img.jpg&#34; alt=&#34;&#34;&gt;&#xA;　C100のサークルに無事当選しました！&#xA;アイドルマスター シンデレラガールズのキャラの1人「&lt;a href=&#34;https://dic.nicovideo.jp/id/4919709&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;佐久間まゆ&lt;/a&gt;」&#xA;と一緒にR言語を使ったデータ解析を行う本を頒布します．&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
