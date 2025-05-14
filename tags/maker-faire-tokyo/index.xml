@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Maker Faire Tokyo on Gitefu | Personal Site</title>
-    <link>http://localhost:1313/tags/maker-faire-tokyo/</link>
+    <link>https://www.gitefu.com/tags/maker-faire-tokyo/</link>
     <description>Recent content in Maker Faire Tokyo on Gitefu | Personal Site</description>
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <lastBuildDate>Mon, 21 Aug 2023 14:46:10 +0600</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/maker-faire-tokyo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.gitefu.com/tags/maker-faire-tokyo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MakerFaireTokyo 2023に出展します！</title>
-      <link>http://localhost:1313/blog/2023/makerfairetokyo/notice/</link>
+      <link>https://www.gitefu.com/blog/2023/makerfairetokyo/notice/</link>
       <pubDate>Mon, 21 Aug 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/makerfairetokyo/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2023/makerfairetokyo/notice/</guid>
       <description>&lt;h4 id=&#34;昨年度の出展の進化verを出展&#34;&gt;昨年度の出展の進化verを出展！&lt;/h4&gt;&#xA;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;【 筆跡根絶！「予告状マシン」】&lt;br&gt;&lt;br&gt;新聞紙の文字で作る、あの「予告状」を自動で作成する機械を作りました！&lt;br&gt;&lt;br&gt;切断・糊付・運搬の3つのメカで、実際に紙を切り貼りしています。&lt;br&gt;&lt;br&gt;カメラによる文字認識機能で、文字を探すのも簡単！&lt;br&gt;&lt;br&gt;怪盗のみなさん、もう面倒な作業はいりません。&lt;a href=&#34;https://twitter.com/hashtag/MFTokyo2023?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#MFTokyo2023&lt;/a&gt; &lt;a href=&#34;https://t.co/AznL73C7cg&#34;&gt;pic.twitter.com/AznL73C7cg&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Maker Faire Tokyo 2022 に出展します</title>
-      <link>http://localhost:1313/blog/2022/mft/notice/</link>
+      <link>https://www.gitefu.com/blog/2022/mft/notice/</link>
       <pubDate>Sat, 20 Aug 2022 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2022/mft/notice/</guid>
+      <guid>https://www.gitefu.com/blog/2022/mft/notice/</guid>
       <description>&lt;p&gt;　私の所属するモノつくり団体&lt;code&gt;tofunology&lt;/code&gt;は&lt;a href=&#34;https://makezine.jp/event/mft2022/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Maker Faire Tokyo 2022&lt;/a&gt;に出展します！&#xA;MakerFaireTokyo2022は毎年ビッグサイトで開催される国内最大級のモノつくりイベントです．&#xA;2019年度から毎年出展し続けており，今年で4年目です．&lt;/p&gt;</description>
     </item>
   </channel>

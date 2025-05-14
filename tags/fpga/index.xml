@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FPGA on Gitefu | Personal Site</title>
-    <link>http://localhost:1313/tags/fpga/</link>
+    <link>https://www.gitefu.com/tags/fpga/</link>
     <description>Recent content in FPGA on Gitefu | Personal Site</description>
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <lastBuildDate>Mon, 05 Jun 2023 14:46:10 +0600</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/fpga/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.gitefu.com/tags/fpga/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VivadoのTCLコマンド：all_inputsとall_outputs</title>
-      <link>http://localhost:1313/blog/2023/vivado/tcl/inputs_outputs/</link>
+      <link>https://www.gitefu.com/blog/2023/vivado/tcl/inputs_outputs/</link>
       <pubDate>Mon, 05 Jun 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/vivado/tcl/inputs_outputs/</guid>
+      <guid>https://www.gitefu.com/blog/2023/vivado/tcl/inputs_outputs/</guid>
       <description>&lt;h4 id=&#34;はじめに&#34;&gt;はじめに&lt;/h4&gt;&#xA;&lt;p&gt;なんか調べたら出てきたので，埋もれないようにメモ．&lt;/p&gt;&#xA;&lt;h4 id=&#34;入出力のポート名を知るtclコマンド&#34;&gt;入出力のポート名を知るTCLコマンド&lt;/h4&gt;&#xA;&lt;p&gt;&lt;code&gt;all_inputs&lt;/code&gt;と&lt;code&gt;all_outputs&lt;/code&gt;があるっぽい&#xA;ただ，幅とかを出してくれるわけではなく，1bitずつ名前を列挙してくれるだけ．&lt;/p&gt;</description>
     </item>
     <item>
       <title>AlveoでDDR4 MIGのAXI_CTRLを消せなかった話</title>
-      <link>http://localhost:1313/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</link>
       <pubDate>Fri, 21 Apr 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/ddr4_sdram_mig/post1/</guid>
       <description>&lt;h4 id=&#34;注意&#34;&gt;注意&lt;/h4&gt;&#xA;&lt;p&gt;この話のオチは&lt;code&gt;AXI_CTRLは消せない(かも？)&lt;/code&gt;です．&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h4 id=&#34;mig-memory-interface-generator&#34;&gt;MIG (Memory Interface Generator)&lt;/h4&gt;&#xA;&lt;p&gt;MIGはXilinxの提供するメモリインターファースの生成器みたいなやつ．&#xA;IPで提供されていて，Vivado上だとBlock Designで作れる．&lt;/p&gt;</description>
     </item>
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(2)</title>
-      <link>http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post2/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</link>
       <pubDate>Sun, 26 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post2/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post2/</guid>
       <description>&lt;h4 id=&#34;前回&#34;&gt;前回&lt;/h4&gt;&#xA;&lt;p&gt;ドキュメントを読んだ．&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;../post1/&#34;&gt;前回の記事：Alveo U250でXPM_MEMORY_SPRAMを使いたい(1)&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h4 id=&#34;githubのソースを使ってみる&#34;&gt;githubのソースを使ってみる&lt;/h4&gt;&#xA;&lt;p&gt;githubでXPM_MEMORY_SPRAMを使っているモジュールを見つけたので，使ってみる．&lt;/p&gt;</description>
     </item>
     <item>
       <title>Alveo U250でXPM_MEMORY_SPRAMを使いたい(1)</title>
-      <link>http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post1/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</link>
       <pubDate>Fri, 24 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/alveou250/xpm_memory_spram/post1/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/xpm_memory_spram/post1/</guid>
       <description>&lt;h4 id=&#34;alveo-u250でxpm_memory_spramを使いたい&#34;&gt;Alveo U250でXPM_MEMORY_SPRAMを使いたい&lt;/h4&gt;&#xA;&lt;p&gt;ちょっとAlveo U250でRAMを指定のファイルで初期化することにした．&#xA;Alveo U250はultrascale+をベースに云々ってサイトに書いてあるので，&lt;code&gt;XPM_MEMORY_SPRAM&lt;/code&gt;が使えそう．&#xA;ECC周りは不要なので，まあ無視します．&#xA;それ以外の部分ちょこちょこ使ってみましょう．&lt;/p&gt;</description>
     </item>
     <item>
       <title>Vivadoツールでのマルチスレッドの話</title>
-      <link>http://localhost:1313/blog/2023/vivado/aboutmaxthreads/post/</link>
+      <link>https://www.gitefu.com/blog/2023/vivado/aboutmaxthreads/post/</link>
       <pubDate>Fri, 24 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/vivado/aboutmaxthreads/post/</guid>
+      <guid>https://www.gitefu.com/blog/2023/vivado/aboutmaxthreads/post/</guid>
       <description>&lt;h4 id=&#34;内容について&#34;&gt;内容について&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;2023.03.24時点の内容です．&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;公式ドキュメントに書いてあったので，メモしただけ．&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.xilinx.com/r/ja-JP/ug904-vivado-implementation/Vivado-%E3%83%84%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vivado Design Suite ユーザー ガイド: インプリメンテーション (UG904):Vivado ツールでのマルチスレッド&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Alveo U250からホストに文字列転送する話</title>
-      <link>http://localhost:1313/blog/2023/alveou250/how2debug/post1/</link>
+      <link>https://www.gitefu.com/blog/2023/alveou250/how2debug/post1/</link>
       <pubDate>Sat, 04 Mar 2023 14:46:10 +0600</pubDate>
-      <guid>http://localhost:1313/blog/2023/alveou250/how2debug/post1/</guid>
+      <guid>https://www.gitefu.com/blog/2023/alveou250/how2debug/post1/</guid>
       <description>&lt;h4 id=&#34;virtual-ioをuartの代わりに&#34;&gt;Virtual I/OをUARTの代わりに&lt;/h4&gt;&#xA;&lt;h5 id=&#34;なんかalveou250でuartが使えない&#34;&gt;なんかAlveoU250でUARTが使えない&lt;/h5&gt;&#xA;&lt;p&gt;うーん．なぜか&lt;a href=&#34;https://japan.xilinx.com/products/boards-and-kits/alveo/u250.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alveo U250&lt;/a&gt;でUARTが使えない．&lt;/p&gt;&#xA;&lt;p&gt;ただ文字を表示したいだけだし，UARTモジュールを実装してみたんだけど，動かなかった．&#xA;なんでや！と思ってXDCファイルを更新したり，ドライバ再インスコしたり，再起動したり，色々したんだけど．．．&#xA;困るのよねえ．何かtipsあれば&lt;a href=&#34;https://twitter.com/tnk_make&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Twitter(@tnk_make)&lt;/a&gt;で教えてください．．．&lt;/p&gt;</description>
     </item>
   </channel>
